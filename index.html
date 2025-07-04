@@ -1,0 +1,2327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English for Professionals: Learning Toolkit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos gerais do corpo e container principal */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow-x: hidden; /* Previne barras de rolagem horizontais */
+            background-color: #0d1117; /* Fundo escuro */
+        }
+        .content-container {
+            position: relative;
+            z-index: 1; /* Mantém o conteúdo acima do canvas */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #e2e8f0; /* Cor do texto claro */
+            padding: 2rem 1rem;
+            text-align: center;
+            background-image: radial-gradient(circle at center, rgba(17, 24, 39, 0.8) 0%, rgba(17, 24, 39, 0.95) 100%);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+        }
+        .text-neon-blue {
+            color: #00eaff; /* Um azul neon brilhante */
+            text-shadow: 0 0 10px rgba(0, 220, 255, 0.7);
+        }
+        .section-card {
+            background-color: rgba(23, 33, 53, 0.9); /* Fundo transparente mais escuro para os cartões */
+            border-radius: 1.5rem; /* Cantos mais arredondados */
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px); /* Efeito de desfoque sutil */
+            border: 1px solid rgba(0, 220, 255, 0.2);
+        }
+        .card-button {
+            /* Estilos Tailwind CSS para botões de cartão */
+            @apply flex justify-between items-center w-full px-5 py-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-lg shadow-md transition-all duration-300 transform hover:scale-102 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-left;
+        }
+        .card-content {
+            /* Estilos Tailwind CSS para conteúdo do cartão */
+            @apply mt-3 p-4 bg-gray-700 bg-opacity-70 rounded-lg text-sm text-gray-200 text-left;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+        .card-content.expanded {
+            max-height: 1200px; /* Aumenta a altura máxima para acomodar mais conteúdo aninhado */
+            padding: 1rem;
+        }
+        .arrow-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .card-button[aria-expanded="true"] .arrow-icon {
+            transform: rotate(180deg);
+        }
+        .practice-textarea {
+            background-color: #1a202c; /* Fundo de input mais escuro */
+            border: 1px solid #4a5568; /* Borda sutil */
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            width: 100%;
+            min-height: 96px; /* Equivalente a h-24 */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .practice-textarea:focus {
+            outline: none;
+            border-color: #00eaff; /* Anel de foco azul neon */
+            box-shadow: 0 0 0 2px rgba(0, 220, 255, 0.5);
+        }
+        .show-example-button {
+            /* Estilos Tailwind CSS para botões de exemplo */
+            @apply px-5 py-2 bg-green-700 hover:bg-green-800 text-white font-semibold rounded-lg shadow-md transition-colors duration-300 mt-3;
+        }
+        .example-box {
+            /* Estilos Tailwind CSS para caixa de exemplo */
+            @apply mt-3 p-4 bg-gray-600 bg-opacity-70 rounded-lg text-sm text-gray-200 text-left;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+        .example-box.expanded {
+            max-height: 500px;
+            padding: 1rem;
+        }
+        .speaker-icon {
+            cursor: pointer;
+            width: 1.2em; /* Ajusta o tamanho conforme necessário */
+            height: 1.2em;
+            fill: #00eaff; /* Cor do ícone */
+            transition: fill 0.2s ease-in-out;
+            margin-left: 0.5rem;
+        }
+        .speaker-icon:hover {
+            fill: #7dd3fc; /* Azul mais claro ao passar o mouse */
+        }
+        .card-item {
+            background-color: rgba(30, 41, 59, 0.8); /* Fundo mais escuro para sub-opções */
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(0, 220, 255, 0.1);
+            position: relative; /* Para o ícone de "aprendido" */
+        }
+        .card-item:last-child {
+            margin-bottom: 0;
+        }
+        /* Classes de gradiente para botões de cartão */
+        .gradient-blue-purple { background-image: linear-gradient(to right, #6366f1, #a855f7); }
+        .gradient-green-teal { background-image: linear-gradient(to right, #10b981, #14b8a6); }
+        .gradient-orange-red { background-image: linear-gradient(to right, #f97316, #ef4444); }
+        .gradient-pink-purple { background-image: linear-gradient(to right, #ec4899, #d946ef); }
+        .gradient-yellow-orange { background-image: linear-gradient(to right, #facc15, #f97316); }
+        .gradient-cyan-blue { background-image: linear-linear-gradient(to right, #06b6d4, #3b82f6); }
+        .gradient-red-purple { background-image: linear-gradient(to right, #ef4444, #a855f7); }
+        .gradient-lime-green { background-image: linear-gradient(to right, #84cc16, #22c5e); }
+        .gradient-fuchsia-pink { background-image: linear-gradient(to right, #d946ef, #ec4899); }
+        .gradient-indigo-red { background-image: linear-gradient(to right, #4f46e5, #ef4444); }
+        .gradient-purple-green { background-image: linear-gradient(to right, #8b5cf6, #10b981); }
+        .gradient-teal-pink { background-image: linear-gradient(to right, #14b8a6, #ec4899); }
+        .gradient-violet-orange { background-image: linear-gradient(to right, #8b008b, #ffa500); }
+        .gradient-gold-brown { background-image: linear-gradient(to right, #ffd700, #a52a2a); }
+        .gradient-silver-gray { background-image: linear-gradient(to right, #c0c0c0, #808080); }
+        .gradient-aqua-marine { background-image: linear-gradient(to right, #00ffff, #7fffd4); }
+
+        /* Estilos para o botão "Marcar como Aprendido" */
+        .mark-learned-button {
+            @apply absolute top-3 right-3 p-2 rounded-full bg-gray-600 hover:bg-gray-500 text-white text-xs font-semibold transition-colors duration-200;
+            width: 32px; /* Tamanho fixo para o círculo */
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0, 220, 255, 0.2);
+        }
+        .mark-learned-button.learned {
+            background-color: #10b981; /* Verde para aprendido */
+            color: #fff;
+        }
+        .mark-learned-button.learned:hover {
+            background-color: #059669;
+        }
+        .learned-checkmark {
+            display: none;
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+        .mark-learned-button.learned .learned-checkmark {
+            display: block;
+        }
+        .mark-learned-button:not(.learned) .learned-checkmark {
+            display: none;
+        }
+        .mark-learned-button:not(.learned) .text-label {
+            display: block;
+        }
+        .mark-learned-button.learned .text-label {
+            display: none;
+        }
+
+        /* Estilos para o campo de input personalizado */
+        .personalized-input-blank {
+            @apply inline-block w-48 h-8 bg-gray-600 border-b-2 border-gray-400 text-gray-200 text-center relative;
+            line-height: 2rem;
+            vertical-align: middle;
+            margin: 0 0.25rem;
+            border-radius: 0.25rem;
+            padding: 0 0.5rem; /* Adiciona preenchimento para o texto */
+        }
+        /* Estilo para a caixa de observação */
+        .observation-box {
+            background-color: rgba(60, 70, 90, 0.9); /* Um fundo ligeiramente diferente */
+            border-left: 4px solid #00eaff; /* Borda lateral neon azul */
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: left;
+            color: #e2e8f0;
+            font-style: italic;
+        }
+        .advanced-button {
+            @apply ml-2 px-3 py-1 bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold rounded-full shadow-md transition-colors duration-200;
+        }
+
+        /* Drag and Drop Styles */
+        .drag-drop-main-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background-color: rgba(30, 41, 59, 0.7);
+            border-radius: 1rem;
+            border: 1px solid rgba(0, 220, 255, 0.3);
+        }
+        .drag-drop-left-column, .drag-drop-right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex: 1; /* Distribute space equally */
+            padding: 1rem;
+            border-radius: 0.75rem;
+            background-color: rgba(17, 24, 39, 0.6); /* Slightly darker background for columns */
+        }
+        .drag-drop-left-column {
+            align-items: flex-start; /* Align items to the left */
+        }
+        .drag-drop-right-column {
+            align-items: center; /* Center items in the right column */
+            min-height: 250px; /* Ensure it has some height even if empty */
+            flex-wrap: wrap; /* Allow items to wrap */
+            justify-content: center; /* Center items vertically */
+        }
+        @media (min-width: 768px) { /* On medium screens and up */
+            .drag-drop-main-container {
+                flex-direction: row;
+            }
+        }
+        .drag-drop-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Space between noun and target */
+            width: 100%;
+            background-color: rgba(23, 33, 53, 0.9);
+            border-radius: 0.75rem;
+            padding: 0.75rem 1.25rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 220, 255, 0.15);
+        }
+        .draggable-item {
+            @apply bg-blue-700 text-white px-5 py-3 rounded-lg cursor-grab shadow-md transition-all duration-200;
+            min-width: 100px; /* Ensures consistent size */
+            text-align: center;
+            font-weight: 600;
+            margin: 0.25rem; /* Small margin for spacing in the right column */
+        }
+        .draggable-item:hover {
+            background-color: #4a90e2; /* Lighter blue on hover */
+        }
+        .droppable-target {
+            @apply bg-gray-600 text-gray-200 px-5 py-3 rounded-lg border-2 border-dashed border-gray-400 min-w-[120px] text-center font-semibold;
+            height: 50px; /* Fixed height for consistency */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+            flex-grow: 1; /* Allow target to grow */
+            margin-left: 1rem; /* Space between noun and target */
+        }
+        .droppable-target.drag-over {
+            border-color: #00eaff;
+            background-color: rgba(0, 220, 255, 0.1);
+        }
+        .droppable-target.correct {
+            background-color: #10b981; /* Green for correct */
+            border-color: #059669;
+            color: #fff;
+        }
+        .droppable-target.incorrect {
+            background-color: #ef4444; /* Red for incorrect */
+            border-color: #b91c1c;
+            color: #fff;
+        }
+        .droppable-target.filled {
+            border-style: solid; /* Solid border when filled */
+        }
+        .drag-reset-button {
+            @apply px-5 py-2 bg-red-700 hover:bg-red-800 text-white font-semibold rounded-lg shadow-md transition-colors duration-300 mt-4;
+        }
+
+        /* Styles for the highlighted formula box */
+        .formula-box {
+            background-color: rgba(0, 220, 255, 0.1); /* Light neon blue background */
+            border: 2px solid #00eaff; /* Neon blue border */
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 220, 255, 0.5); /* Glowing effect */
+        }
+        .formula-box strong {
+            color: #00eaff;
+            font-size: 1.5rem;
+        }
+        .formula-box p {
+            color: #e2e8f0;
+            margin-top: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        /* Table of Contents specific styles */
+        .toc-container {
+            background-color: rgba(23, 33, 53, 0.9);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 220, 255, 0.2);
+            text-align: left;
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            margin-bottom: 0.75rem;
+        }
+        .toc-list a {
+            color: #7dd3fc; /* Light blue for links */
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+        .toc-list a:hover {
+            color: #00eaff; /* Neon blue on hover */
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body class="bg-black">
+    <div class="content-container w-full px-4 md:px-8 lg:px-12">
+        <header class="w-full max-w-4xl mx-auto py-8">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 text-neon-blue leading-tight">
+                Inglês para Profissionais: Seu kit de aprendizado rápido no trabalho/mercado!
+            </h1>
+            <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed text-gray-300">
+                Comece a falar inglês no trabalho hoje mesmo. Este kit foi feito para você que precisa de um impulso rápido e prático.
+            </p>
+            <p class="italic text-green-400 text-lg md:text-xl mt-4">
+                Explore os cartões abaixo, pratique e sinta a diferença na sua comunicação profissional!
+            </p>
+        </header>
+
+        <!-- Table of Contents Section -->
+        <nav class="toc-container w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">Índice</h2>
+            <ul class="toc-list" id="tableOfContentsList">
+                <!-- TOC items will be dynamically generated here by JavaScript -->
+            </ul>
+        </nav>
+
+        <section id="cumprimentos-hi-there" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">Cumprimentos: "Hi there"</h2>
+            <p class="text-base text-gray-300 mb-4 text-left">
+                A expressão <strong class="text-neon-blue">"Hi there"</strong> é uma forma informal e amigável de cumprimentar alguém em inglês. Ela pode ser traduzida para o português brasileiro como:
+            </p>
+            <ul class="list-disc list-inside text-left text-gray-300 mb-6 pl-4">
+                <li>Oi!</li>
+                <li>Olá!</li>
+                <li>E aí!</li>
+                <li>Oi, tudo bem?</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 text-left">Explicação detalhada</h3>
+            <ul class="list-disc list-inside text-left text-gray-300 mb-6 pl-4">
+                <li><strong class="text-neon-blue">"Hi"</strong> é um cumprimento simples e casual, equivalente ao nosso "Oi" ou "Olá".</li>
+                <li><strong class="text-neon-blue">"There"</strong> aqui não tem um sentido literal, mas serve para dar um tom mais descontraído e acolhedor à saudação, como se você estivesse chamando a atenção da pessoa de forma amigável.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 text-left">Situações de Uso Informal</h3>
+            <ul class="list-disc list-inside text-left text-gray-300 mb-6 pl-4">
+                <li>Ao encontrar colegas de trabalho em um ambiente descontraído (fora de reuniões formais).</li>
+                <li>Para iniciar uma conversa casual com alguém que você já conhece.</li>
+                <li>Em e-mails ou mensagens rápidas para pessoas com quem você tem um relacionamento mais informal.</li>
+                <li>Ao cumprimentar alguém que você vê regularmente, como um vizinho ou colega de academia.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 text-left">Exemplos de uso</h3>
+            <p class="text-gray-300 mb-2 text-left">Alguém chega e você quer cumprimentar de forma informal:</p>
+            <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 text-left mb-4">
+                <p class="text-lg text-green-300 font-semibold">
+                    <strong>Hi there! How are you doing?</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hi there! How are you doing?')">&#128266;</span>
+                </p>
+                <p class="text-gray-400">(Oi! Como você está?)</p>
+            </div>
+            <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                <p class="text-lg text-green-300 font-semibold">
+                    <strong>Hi, there! How is it going?</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hi there! How is it going?')">&#128266;</span>
+                </p>
+                <p class="text-gray-400">(Oi! Como vai? / Como as coisas estão indo?)</p>
+            </div>
+            <p class="text-gray-300 mt-4 text-left">
+                Ambas as frases, "How are you doing?" e "How is it going?", são formas comuns e intercambiáveis de perguntar "Como você está?" ou "Como as coisas estão indo?". Você pode usá-las em situações informais com amigos, colegas de trabalho ou conhecidos.
+            </p>
+        </section>
+
+        <section id="respostas-comuns" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">2. Respostas Comuns</h2>
+            <p class="text-base text-gray-300 mb-6">
+                Aprenda a responder a perguntas sobre como você está em diferentes níveis de informalidade.
+            </p>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>I am doing fine.</strong> <span class="speaker-icon" onclick="playAudio(event, 'I am doing fine.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Estou bem. / Estou indo bem.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>I am doing good.</strong> <span class="speaker-icon" onclick="playAudio(event, 'I am doing good.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Estou bem. / Estou indo bem. - Uso comum, mas "fine" é gramaticalmente mais correto para estado.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>I am doing great.</strong> <span class="speaker-icon" onclick="playAudio(event, 'I am doing great.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Estou ótimo(a)! / Estou indo muito bem!)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>I am well.</strong> <span class="speaker-icon" onclick="playAudio(event, 'I am well.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Estou bem de saúde.)</p>
+                    <div class="observation-box">
+                        <p class="font-bold text-neon-blue mb-1">Observação:</p>
+                        <p>A expressão "I am well" é mais utilizada para indicar que você está bem de saúde, ou seja, "saúde em caixa". É uma resposta mais formal e específica sobre o seu bem-estar físico.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="perguntas-de-acompanhamento" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">3. Perguntas de Acompanhamento</h2>
+            <p class="text-base text-gray-300 mb-6">
+                Aprenda a continuar a conversa após responder como você está.
+            </p>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Thank you. What about yourself?</strong> <span class="speaker-icon" onclick="playAudio(event, 'Thank you. What about yourself?')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Obrigado(a). E você?)</p>
+                    <div class="observation-box">
+                        <p class="font-bold text-neon-blue mb-1">Observação:</p>
+                        <p>"Yourself" é um pronome reflexivo que, neste contexto, funciona como uma forma mais direta e concisa de perguntar "E quanto a você?" ou "E você?". Em português, ele substitui a necessidade de usar "o senhor" ou "a senhora", mantendo a informalidade e a fluidez da conversa. É uma forma educada de retornar a pergunta.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pratica-de-dialogo" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">4. Prática de Diálogo</h2>
+            <p class="text-base text-gray-300 mb-6">
+                Agora é a sua vez! Crie um pequeno diálogo usando as expressões que você aprendeu nas seções anteriores (cumprimentos, respostas e perguntas de acompanhamento).
+            </p>
+            <div class="space-y-4 text-left">
+                <textarea id="dialoguePracticeTextarea" class="practice-textarea" placeholder="Escreva seu diálogo aqui, por exemplo:&#10;&#10;A: Hi there! How are you doing?&#10;B: I am doing great! Thank you. What about yourself?&#10;A: I am doing fine."></textarea>
+                <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkDialoguePractice()">Verificar Diálogo</button>
+                <div class="feedback-message mt-2 text-sm" id="dialoguePracticeFeedback"></div>
+            </div>
+        </section>
+
+        <section id="perguntas-sobre-o-fim-de-semana" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">5. Perguntas sobre o Fim de Semana</h2>
+            <p class="text-base text-gray-300 mb-6">
+                Aprenda a perguntar sobre o fim de semana de forma casual.
+            </p>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>How was the weekend?</strong> <span class="speaker-icon" onclick="playAudio(event, 'How was the weekend?')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400 text-sm mt-1">
+                        <span class="font-bold">How</span> = Como <br>
+                        <span class="font-bold">was</span> = foi (passado do verbo "to be") <br>
+                        <span class="font-bold">the</span> = o / a <br>
+                        <span class="font-bold">weekend</span> = fim de semana <br>
+                        <span class="font-bold">Tradução:</span> Como foi o fim de semana?
+                    </p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>How did the weekend go?</strong> <span class="speaker-icon" onclick="playAudio(event, 'How did the weekend go?')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma mais avançada de perguntar sobre o fim de semana, focando no desenrolar dos acontecimentos.')">Inglês Avançado</button>
+                    </p>
+                    <p class="text-gray-400 text-sm mt-1">
+                        <span class="font-bold">How</span> = Como <br>
+                        <span class="font-bold">did</span> = auxiliar do passado simples (não tem tradução direta aqui, indica ação passada) <br>
+                        <span class="font-bold">the</span> = o / a <br>
+                        <span class="font-bold">weekend</span> = fim de semana <br>
+                        <span class="font-bold">go</span> = ir / passar (neste contexto, "passar" ou "acontecer") <br>
+                        <span class="font-bold">Tradução:</span> Como foi o fim de semana? / Como o fim de semana passou?
+                    </p>
+                    <div class="observation-box">
+                        <p class="font-bold text-neon-blue mb-1">Observação sobre a estrutura:</p>
+                        <p>Ambas as frases são usadas para perguntar sobre o fim de semana. "How was..." é uma forma direta de perguntar sobre o estado ou a qualidade de algo no passado. "How did... go?" é uma forma alternativa que usa o auxiliar "did" com o verbo "go" para perguntar sobre o andamento ou desenvolvimento de um evento passado. Ambas são intercambiáveis para este contexto.</p>
+                        <p class="mt-2">Você pode aplicar essa estrutura para outras perguntas sobre o passado:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>"How was your trip?" (Como foi sua viagem?)</li>
+                            <li>"How did your presentation go?" (Como foi sua apresentação?)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Respostas Comuns</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Nothing much!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Nothing much!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Nada demais! / Nada de muito especial!)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Nothing much, just the basics.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Nothing much, just the basics.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Nada demais, só o básico.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Pretty good!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Pretty good!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Muito bom! / Bem legal!)</p>
+                </div>
+                <div class="observation-box">
+                    <p class="font-bold text-neon-blue mb-1">Observação para Brasileiros:</p>
+                    <p>A expressão "Nothing much!" é muito comum e equivale ao nosso "Nada demais!", "Nada de muito especial!", "Tudo na mesma!", "A coisa de sempre!", "Não fiz grande coisa!" ou "Fiz as coisas de sempre!" em português. É uma resposta casual que indica que não houve grandes novidades ou eventos marcantes. É perfeita para manter a conversa leve e informal, sem a necessidade de entrar em muitos detalhes.</p>
+                    <p class="mt-2"><strong class="text-neon-blue">"Pretty good!"</strong> é uma forma informal e positiva de dizer que algo foi "muito bom" ou "bem legal". É mais forte que "fine" ou "good" e transmite um entusiasmo moderado. Pode ser traduzido como "Muito bom!", "Bem legal!", "Foi ótimo!" (de forma descontraída).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="atividades-comuns-de-fim-de-semana" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">6. Atividades Comuns de Fim de Semana</h2>
+            <p class="text-base text-gray-300 mb-6">
+                Aqui estão algumas atividades comuns de fim de semana que você pode usar em suas conversas:
+            </p>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Relax at home.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Relax at home.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma básica de dizer "relaxar em casa".')">Inglês Básico</button>
+                    </p>
+                    <p class="text-gray-400">(Relaxar em casa.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Chill out at home.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Chill out at home.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('É uma expressão mais informal para "relaxar em casa", equivalente a "azar em casa".')">Inglês Avançado</button>
+                    </p>
+                    <p class="text-gray-400">(Azar em casa.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Visit my parents.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Visit my parents.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Visitar meus pais.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Pay a visit to my parents.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Pay a visit to my parents.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma mais formal e educada de dizer "visitar meus pais".')">Inglês Avançado</button>
+                    </p>
+                    <p class="text-gray-400">(Fazer uma visita aos meus pais.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Watch TV/series.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Watch TV or series.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma muito básica de dizer "assistir TV/séries".')">Inglês Muito Básico</button>
+                    </p>
+                    <p class="text-gray-400">(Assistir TV/séries.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Catch up on my TV series.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Catch up on my TV series.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Significa colocar em dia as séries de TV que você não conseguiu assistir.')">Inglês Avançado</button>
+                    </p>
+                    <p class="text-gray-400">(Colocar minhas séries de TV em dia.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Catch up on some Netflix.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Catch up on some Netflix.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Similar a "catch up on my TV series", mas específico para a plataforma Netflix.')">Inglês Avançado</button>
+                    </p>
+                    <p class="text-gray-400">(Colocar o Netflix em dia.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Go out for dinner.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Go out for dinner.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma intermediária de dizer "sair para jantar".')">Inglês Intermediário</button>
+                    </p>
+                    <p class="text-gray-400">(Sair para jantar.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Dine out.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Dine out.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma mais concisa e avançada de dizer "sair para jantar".')">Inglês Avançado</button>
+                    </p>
+                    <p class="text-gray-400">(Sair para jantar.)</p>
+                    <div class="observation-box">
+                        <p class="font-bold text-neon-blue mb-1">Observação:</p>
+                        <p><strong class="text-neon-blue">Dine</strong> é um verbo mais formal que significa "jantar". <strong class="text-neon-blue">Dinner</strong> é o substantivo para "jantar" (a refeição).</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Go to the gym.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Go to the gym.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma intermediária de dizer "ir à academia".')">Inglês Intermediário</button>
+                    </p>
+                    <p class="text-gray-400">(Ir à academia.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Work out in the gym.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Work out in the gym.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Malhar na academia.)</p>
+                    <div class="observation-box">
+                        <p class="font-bold text-neon-blue mb-1">Observação para Brasileiros:</p>
+                        <p>Em inglês, <strong class="text-neon-blue">"gym"</strong> é a palavra correta para "academia" (local de exercícios). <strong class="text-neon-blue">"Academy"</strong> em inglês se refere a uma instituição de ensino superior ou uma escola especializada (ex: military academy). <strong class="text-neon-blue">"Work out"</strong> significa "malhar" ou "fazer exercícios".</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Go shopping.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Go shopping.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma intermediária de dizer "fazer compras".')">Inglês Intermediário</button>
+                    </p>
+                    <p class="text-gray-400">(Fazer compras.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Read a book.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Read a book.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma básica de dizer "ler um livro".')">Inglês Básico</button>
+                    </p>
+                    <p class="text-gray-400">(Ler um livro.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Catch up on a book.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Catch up on a book.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Significa colocar a leitura de um livro em dia, ou seja, ler um livro que você queria ler ou continuar um que parou.')">Inglês Avançado</button>
+                    </p>
+                    <p class="text-gray-400">(Colocar a leitura de um livro em dia.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Run errands.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Run errands.')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Significa fazer tarefas ou afazeres do dia a dia, como ir ao banco, supermercado, correios, etc.')">Inglês Avançado</button>
+                    </p>
+                    <p class="text-gray-400">(Fazer tarefas/afazeres.)</p>
+                    <div class="observation-box">
+                        <p class="font-bold text-neon-blue mb-1">Observação para Brasileiros:</p>
+                        <p><strong class="text-neon-blue">"Run errands"</strong> é uma expressão muito comum e útil para descrever a ação de fazer aquelas pequenas tarefas do dia a dia, como ir ao banco, ao supermercado, buscar algo, etc. Em português, seria algo como "resolver uns pepinos", "fazer os corres", "dar uma saidinha para resolver umas coisas" ou "fazer os afazeres de casa/rua".</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pratica-de-dialogo-fim-de-semana" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">7. Prática de Diálogo (Fim de Semana)</h2>
+            <p class="text-base text-gray-300 mb-6">
+                Crie um pequeno diálogo utilizando as perguntas e respostas sobre o fim de semana que você aprendeu na seção 5, e as atividades da seção 6.
+            </p>
+
+            <div class="space-y-6">
+                <div class="bg-gray-800 rounded-lg p-6 border border-purple-600">
+                    <h3 class="text-2xl font-bold text-purple-300 mb-4 text-left">Prática de Tradução:</h3>
+                    <p class="text-lg text-gray-200 mb-3 text-left">
+                        Traduza a seguinte frase para o inglês:
+                    </p>
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            <strong>Como foi seu fim de semana? A coisa de sempre.</strong>
+                        </p>
+                    </div>
+                    <textarea id="weekendTranslationTextarea" class="practice-textarea" placeholder="Escreva sua tradução aqui..."></textarea>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkWeekendTranslation()">Verificar Tradução</button>
+                    <div class="feedback-message mt-2 text-sm" id="weekendTranslationFeedback"></div>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 border border-teal-600">
+                    <h3 class="text-2xl font-bold text-teal-300 mb-4 text-left">Prática de Resposta:</h3>
+                    <p class="text-lg text-gray-200 mb-3 text-left">
+                        Responda à pergunta "How was your weekend?" incluindo pelo menos 3 atividades da seção 6.
+                    </p>
+                    <textarea id="weekendResponseTextarea" class="practice-textarea" placeholder="Escreva sua resposta aqui, por exemplo:&#10;&#10;It was good! I relaxed at home, watched TV series, and went shopping."></textarea>
+                    <button class="show-example-button bg-teal-600 hover:bg-teal-700" onclick="checkWeekendResponse()">Verificar Resposta</button>
+                    <div class="feedback-message mt-2 text-sm" id="weekendResponseFeedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="estrutura-svo" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">8. Estrutura SVO (Subject-Verb-Object)</h2>
+            <p class="text-base text-gray-300 mb-6">
+                Aprender a estrutura básica das frases em inglês é fundamental para se comunicar com clareza. Em inglês, a ordem mais comum das palavras é <strong class="text-neon-blue">SVO: Sujeito (Subject) + Verbo (Verb) + Objeto (Object)</strong>.
+            </p>
+
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Subject (Sujeito):</strong> Quem ou o que realiza a ação.
+                    </p>
+                    <p class="text-gray-400">Ex: <strong class="text-yellow-300">I</strong> (Eu), <strong class="text-yellow-300">She</strong> (Ela), <strong class="text-yellow-300">The company</strong> (A empresa).</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Verb (Verbo):</strong> A ação que está sendo realizada.
+                    </p>
+                    <p class="text-gray-400">Ex: <strong class="text-yellow-300">work</strong> (trabalhar), <strong class="text-yellow-300">eats</strong> (come), <strong class="text-yellow-300">developed</strong> (desenvolveu).</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Object (Objeto):</strong> Quem ou o que recebe a ação do verbo.
+                    </p>
+                    <p class="text-gray-400">Ex: <strong class="text-yellow-300">a lot</strong> (muito), <strong class="text-yellow-300">an apple</strong> (uma maçã), <strong class="text-yellow-300">a new software</strong> (um novo software).</p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Pronomes Pessoais (Personal Pronouns)</h3>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                Os pronomes pessoais são essenciais em inglês, pois, ao contrário do português, o sujeito da frase é quase sempre obrigatório.
+            </p>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-yellow-300">I</strong> <span class="speaker-icon" onclick="playAudio(event, 'I')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Eu</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Observação Importante:</p>
+                        <p><strong class="text-red-400">"I" (eu) é SEMPRE escrito com letra maiúscula</strong>, independentemente de sua posição na frase (início, meio ou fim).</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-yellow-300">You</strong> <span class="speaker-icon" onclick="playAudio(event, 'You')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Você / Vocês / O(A) Senhor(a) / Os(As) Senhores(as)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Cuidado para Brasileiros:</p>
+                        <p><strong class="text-red-400">"You" é usado tanto para o singular quanto para o plural</strong>, e também para contextos formais e informais. Em inglês, não há distinção entre "você", "vocês", "o senhor" ou "a senhora"; todos são "you".</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-yellow-300">He</strong> <span class="speaker-icon" onclick="playAudio(event, 'He')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Ele</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p><strong class="text-red-400">Somente para humanos do sexo masculino no singular.</strong></p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-yellow-300">She</strong> <span class="speaker-icon" onclick="playAudio(event, 'She')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Ela</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p><strong class="text-red-400">Somente para humanos do sexo feminino no singular.</strong></p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-yellow-300">It</strong> <span class="speaker-icon" onclick="playAudio(event, 'It')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Ele / Ela / Isso (para coisas, animais, conceitos)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso Crucial para Brasileiros:</p>
+                        <p><strong class="text-red-400">"It" é usado para TUDO que não é um ser humano no singular.</strong> Isso inclui objetos, animais (quando o sexo não é conhecido ou não importa), plantas, lugares, ideias, sentimentos, fenômenos naturais (clima), tempo (horas, dias), etc.</p>
+                        <p class="mt-2">Exemplos:</p>
+                        <ul class="list-disc list-inside ml-4">
+                            <li>"It is raining." (Está chovendo.)</li>
+                            <li>"It is a beautiful day." (É um lindo dia.)</li>
+                            <li>"The dog is cute. It barks a lot." (O cachorro é fofo. Ele late muito.)</li>
+                            <li>"The book is interesting. I am reading it." (O livro é interessante. Eu estou lendo ele.)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-yellow-300">We</strong> <span class="speaker-icon" onclick="playAudio(event, 'We')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Nós</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Para se referir a um grupo que inclui a pessoa que fala.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-yellow-300">They</strong> <span class="speaker-icon" onclick="playAudio(event, 'They')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Eles / Elas</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso Essencial para Brasileiros:</p>
+                        <p><strong class="text-red-400">"They" é o plural universal em inglês.</strong> Ele é usado para:</p>
+                        <ul class="list-disc list-inside ml-4 mt-1">
+                            <li><strong class="text-red-400">Pessoas (masculino, feminino ou misto no plural):</strong> "John and Mary are here. They are waiting." (João e Maria estão aqui. Eles estão esperando.)</li>
+                            <li><strong class="text-red-400">Objetos, animais, plantas, conceitos no plural (o plural de "it"):</strong> "The books are on the table. They are heavy." (Os livros estão na mesa. Eles são pesados.) "The dogs are barking. They are hungry." (Os cachorros estão latindo. Eles estão com fome.)</li>
+                        </ul>
+                        <p class="mt-2">Lembre-se: se é plural, seja pessoa ou coisa, use "They".</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Exercícios de Prática (Pronomes Pessoais)</h3>
+            <div class="space-y-6">
+                <div class="bg-gray-800 rounded-lg p-6 border border-purple-600">
+                    <h4 class="text-xl font-bold text-purple-300 mb-4 text-left">Exercício: Preencha com o Pronome Correto</h4>
+                    <p class="text-lg text-gray-200 mb-3 text-left">
+                        <strong class="text-neon-blue">Observe o sujeito da primeira frase e, na segunda frase, substitua-o pelo pronome pessoal (I, you, he, she, it, we, they) mais adequado.</strong>
+                    </p>
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            1. My car is old. <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise1" class="personalized-input-blank w-24" placeholder="Pronome"> needs a new battery.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise1', 'It', 'pronounFeedback1')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback1"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            2. John and Sarah are colleagues. <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise2" class="personalized-input-blank w-24" placeholder="Pronome"> work together.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise2', 'They', 'pronounFeedback2')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback2"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            3. My sister is a doctor. <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise3" class="personalized-input-blank w-24" placeholder="Pronome"> helps many people.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise3', 'She', 'pronounFeedback3')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback3"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            4. My name is Alex. <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise4" class="personalized-input-blank w-24" placeholder="Pronome"> am learning English.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise4', 'I', 'pronounFeedback4')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback4"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            5. The new project is challenging. <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise5" class="personalized-input-blank w-24" placeholder="Pronome"> requires a lot of effort.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise5', 'It', 'pronounFeedback5')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback5"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            6. My colleagues and I will present tomorrow. <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise6" class="personalized-input-blank w-24" placeholder="Pronome"> are ready.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise6', 'We', 'pronounFeedback6')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback6"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            7. The clients are waiting. <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise7" class="personalized-input-blank w-24" placeholder="Pronome"> need the report.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise7', 'They', 'pronounFeedback7')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback7"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            8. Is your boss in the office? <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise8" class="personalized-input-blank w-24" placeholder="Pronome"> is in a meeting.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise8', 'He', 'pronounFeedback8')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback8"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            9. The coffee machine is broken. <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise9" class="personalized-input-blank w-24" placeholder="Pronome"> needs repair.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise9', 'It', 'pronounFeedback9')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback9"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            10. Are you and your team available? <span class="text-gray-400">Your answer:</span> <input type="text" id="pronounExercise10" class="personalized-input-blank w-24" placeholder="Pronome"> can discuss it now.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkPronounExercise('pronounExercise10', 'We', 'pronounFeedback10')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="pronounFeedback10"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="drag-and-drop-pronomes-pessoais" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">9. Drag and Drop: Pronomes Pessoais</h2>
+            <p class="text-base text-gray-300 mb-6">
+                Arraste o pronome correto da coluna da direita e solte-o ao lado da expressão correspondente na coluna da esquerda.
+            </p>
+
+            <div class="drag-drop-main-container">
+                <div class="drag-drop-left-column" id="dragDropLeftColumn">
+                    <!-- Questions will be dynamically generated here -->
+                </div>
+                <div class="drag-drop-right-column" id="dragDropRightColumn">
+                    <p class="w-full text-center text-lg text-neon-blue font-bold mb-3">Arraste os pronomes:</p>
+                    <!-- Draggable pronouns will be placed here dynamically -->
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4 mt-8">
+                <button class="show-example-button bg-green-600 hover:bg-green-700" onclick="checkDragDropAnswers()">Verificar Respostas</button>
+                <button class="drag-reset-button" onclick="resetDragDropExercise()">Reiniciar Exercício</button>
+            </div>
+            <div class="feedback-message mt-4 text-sm" id="dragDropFeedback"></div>
+        </section>
+
+        <!-- Seção 10: O Uso de "It" como Sujeito Impessoal -->
+        <section id="o-uso-de-it-como-sujeito-impessoal" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">10. O Uso de "It" como Sujeito Impessoal</h2>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                No português, é comum iniciarmos frases diretamente com um verbo, especialmente ao falar sobre tempo, clima, distância ou situações gerais. Por exemplo: "Está chovendo", "É tarde", "Foi difícil".
+            </p>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                No inglês, no entanto, a regra geral é que <strong class="text-neon-blue">toda frase precisa de um sujeito explícito</strong>. Nesses casos em que o português omite o sujeito, o inglês utiliza o pronome <strong class="text-neon-blue">"It"</strong> como um "sujeito impessoal" ou "sujeito nulo" para preencher essa posição.
+            </p>
+
+            <div class="formula-box">
+                <p><strong>FÓRMULA ESSENCIAL:</strong></p>
+                <p><strong class="text-neon-blue">IT + VERBO TO BE (IS/WAS) + INFORMAÇÃO</strong></p>
+                <p class="text-sm text-gray-400 mt-2">
+                    <strong>Dica:</strong> Sempre que a frase em português começar com um verbo impessoal (que não se refere a uma pessoa ou coisa específica) e não tiver um sujeito claro, pense em "It" para iniciar a frase em inglês.
+                </p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Quando usar "It" como Sujeito Impessoal:</h3>
+            <ul class="list-disc list-inside text-left text-gray-300 mb-6 pl-4">
+                <li><strong class="text-neon-blue">Clima/Tempo:</strong> Para descrever condições climáticas.</li>
+                <li><strong class="text-neon-blue">Horas/Datas:</strong> Para falar sobre o tempo no sentido de horas, dias, meses.</li>
+                <li><strong class="text-neon-blue">Distância:</strong> Para indicar distâncias.</li>
+                <li><strong class="text-neon-blue">Situações Gerais/Opiniões:</strong> Para fazer afirmações gerais ou expressar opiniões sobre uma situação.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Exemplos e Comparação (Português vs. Inglês):</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> Está chovendo.
+                        <br>
+                        <strong>Inglês:</strong> <strong class="text-yellow-300">It</strong> is raining. <span class="speaker-icon" onclick="playAudio(event, 'It is raining.')">&#128266;</span>
+                        <span class="text-gray-400 text-sm italic ml-2">(Clima)</span>
+                    </p>
+                    <p class="text-gray-400">
+                        <span class="font-bold">Por que "It"?</span> No português, "Está chovendo" não tem um sujeito explícito. No inglês, "It" é usado para cumprir a regra de que toda frase deve ter um sujeito.
+                    </p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> É tarde.
+                        <br>
+                        <strong>Inglês:</strong> <strong class="text-yellow-300">It</strong> is late. <span class="speaker-icon" onclick="playAudio(event, 'It is late.')">&#128266;</span>
+                        <span class="text-gray-400 text-sm italic ml-2">(Horas)</span>
+                    </p>
+                    <p class="text-gray-400">
+                        <span class="font-bold">Por que "It"?</span> Similar ao clima, ao falar sobre a hora, "It" é o sujeito impessoal necessário.
+                    </p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> Foi difícil.
+                        <br>
+                        <strong>Inglês:</strong> <strong class="text-yellow-300">It</strong> was difficult. <span class="speaker-icon" onclick="playAudio(event, 'It was difficult.')">&#128266;</span>
+                        <span class="text-gray-400 text-sm italic ml-2">(Situação Geral)</span>
+                    </p>
+                    <p class="text-gray-400">
+                        <span class="font-bold">Por que "It"?</span> Ao expressar uma opinião sobre uma situação geral, "It" atua como o sujeito.
+                    </p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> Está quente hoje.
+                        <br>
+                        <strong>Inglês:</strong> <strong class="text-yellow-300">It</strong> is hot today. <span class="speaker-icon" onclick="playAudio(event, 'It is hot today.')">&#128266;</span>
+                        <span class="text-gray-400 text-sm italic ml-2">(Clima)</span>
+                    </p>
+                    <p class="text-gray-400">
+                        <span class="font-bold">Por que "It"?</span> Para descrever a temperatura.
+                    </p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> É importante.
+                        <br>
+                        <strong>Inglês:</strong> <strong class="text-yellow-300">It</strong> is important. <span class="speaker-icon" onclick="playAudio(event, 'It is important.')">&#128266;</span>
+                        <span class="text-gray-400 text-sm italic ml-2">(Situação Geral)</span>
+                    </p>
+                    <p class="text-gray-400">
+                        <span class="font-bold">Por que "It"?</span> Para fazer uma afirmação geral sobre a importância de algo.
+                    </p>
+                </div>
+                <!-- Novos 2 exemplos -->
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> É minha vez.
+                        <br>
+                        <strong>Inglês:</strong> <strong class="text-yellow-300">It</strong> is my turn. <span class="speaker-icon" onclick="playAudio(event, 'It is my turn.')">&#128266;</span>
+                        <span class="text-gray-400 text-sm italic ml-2">(Situação Geral)</span>
+                    </p>
+                    <p class="text-gray-400">
+                        <span class="font-bold">Por que "It"?</span> Usado para indicar uma situação ou vez de alguém.
+                    </p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> Está ensolarado.
+                        <br>
+                        <strong>Inglês:</strong> <strong class="text-yellow-300">It</strong> is sunny. <span class="speaker-icon" onclick="playAudio(event, 'It is sunny.')">&#128266;</span>
+                        <span class="text-gray-400 text-sm italic ml-2">(Clima)</span>
+                    </p>
+                    <p class="text-gray-400">
+                        <span class="font-bold">Por que "It"?</span> Para descrever a condição do tempo.
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Exercícios de Prática (Uso de "It" Impessoal)</h3>
+            <div class="space-y-6">
+                <div class="bg-gray-800 rounded-lg p-6 border border-purple-600">
+                    <h4 class="text-xl font-bold text-purple-300 mb-4 text-left">Traduza para o Inglês, usando "It":</h4>
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            1. <span class="text-neon-blue">É</span> sexta-feira. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise1" class="personalized-input-blank w-64" placeholder="It is Friday.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise1', 'It is Friday.', 'itFeedback1')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback1"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            2. <span class="text-neon-blue">Está</span> frio lá fora. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise2" class="personalized-input-blank w-64" placeholder="It is cold outside.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise2', 'It is cold outside.', 'itFeedback2')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback2"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            3. <span class="text-neon-blue">É</span> fácil aprender. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise3" class="personalized-input-blank w-64" placeholder="It is easy to learn.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise3', 'It is easy to learn.', 'itFeedback3')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback3"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            4. <span class="text-neon-blue">Era</span> uma vez... <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise4" class="personalized-input-blank w-64" placeholder="It was once upon a time...">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise4', 'It was once upon a time...', 'itFeedback4')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback4"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            5. <span class="text-neon-blue">Está</span> a 10 quilômetros daqui. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise5" class="personalized-input-blank w-64" placeholder="It is 10 kilometers from here.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise5', 'It is 10 kilometers from here.', 'itFeedback5')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback5"></div>
+
+                    <!-- Novos 5 exercícios -->
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            6. <span class="text-neon-blue">Está</span> nublado hoje. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise6" class="personalized-input-blank w-64" placeholder="It is cloudy today.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise6', 'It is cloudy today.', 'itFeedback6')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback6"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            7. <span class="text-neon-blue">É</span> 10 horas. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise7" class="personalized-input-blank w-64" placeholder="It is 10 o'clock.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise7', 'It is 10 o\'clock.', 'itFeedback7')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback7"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            8. <span class="text-neon-blue">É</span> perigoso. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise8" class="personalized-input-blank w-64" placeholder="It is dangerous.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise8', 'It is dangerous.', 'itFeedback8')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback8"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            9. <span class="text-neon-blue">É</span> a sua vez de falar. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise9" class="personalized-input-blank w-64" placeholder="It is your turn to speak.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise9', 'It is your turn to speak.', 'itFeedback9')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback9"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            10. <span class="text-neon-blue">Foi</span> difícil de acreditar. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="itExercise10" class="personalized-input-blank w-64" placeholder="It was hard to believe.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkItExercise('itExercise10', 'It was hard to believe.', 'itFeedback10')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="itFeedback10"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção 11: Expressando Idade -->
+        <section id="expressando-idade" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">11. Expressando Idade: "I am... years old"</h2>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                Uma das diferenças mais comuns e importantes entre o português e o inglês é como expressamos a idade.
+            </p>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                No português, usamos o verbo "ter" (to have): "Eu <strong class="text-neon-blue">tenho</strong> 30 anos."
+                <br>
+                No inglês, usamos o verbo "ser/estar" (to be): "I <strong class="text-neon-blue">am</strong> 30 years old."
+            </p>
+
+            <div class="formula-box">
+                <p><strong>FÓRMULA ESSENCIAL PARA IDADE:</strong></p>
+                <p><strong class="text-neon-blue">SUJEITO + VERBO TO BE (AM/IS/ARE) + IDADE + <span class="text-yellow-300 text-2xl">YEARS OLD</span></strong></p>
+                <p class="text-sm text-gray-400 mt-2">
+                    <strong>Dica:</strong> Lembre-se que em inglês, você "é" (am/is/are) velho(a) por X anos, não "tem" X anos. <strong class="text-yellow-300">É crucial incluir "years old" no final da frase para que ela esteja completa e natural.</strong>
+                </p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Exemplos:</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> Eu tenho 25 anos.
+                        <br>
+                        <strong>Inglês:</strong> I <strong class="text-yellow-300">am</strong> 25 <strong class="text-yellow-300">years old</strong>. <span class="speaker-icon" onclick="playAudio(event, 'I am 25 years old.')">&#128266;</span>
+                    </p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> Ele tem 40 anos.
+                        <br>
+                        <strong>Inglês:</strong> He <strong class="text-yellow-300">is</strong> 40 <strong class="text-yellow-300">years old</strong>. <span class="speaker-icon" onclick="playAudio(event, 'He is 40 years old.')">&#128266;</span>
+                    </p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Português:</strong> Nós temos 30 anos.
+                        <br>
+                        <strong>Inglês:</strong> We <strong class="text-yellow-300">are</strong> 30 <strong class="text-yellow-300">years old</strong>. <span class="speaker-icon" onclick="playAudio(event, 'We are 30 years old.')">&#128266;</span>
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Exercício de Prática:</h3>
+            <div class="space-y-6">
+                <div class="bg-gray-800 rounded-lg p-6 border border-purple-600">
+                    <h4 class="text-xl font-bold text-purple-300 mb-4 text-left">Traduza para o Inglês, usando a fórmula correta:</h4>
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            Eu tenho <span class="text-gray-400">sua idade</span> anos. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="ageExercise" class="personalized-input-blank w-64" placeholder="I am X years old.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkAgeExercise()">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="ageFeedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nova Seção 12: Onde Você Mora -->
+        <section id="onde-voce-mora" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">12. Onde Você Mora: "I live in..."</h2>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                Para dizer onde você mora em inglês, a estrutura mais comum e correta é usar o verbo "to live" (morar) seguido da preposição <strong class="text-neon-blue">"in"</strong>.
+            </p>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                No português, dizemos "Eu moro <strong class="text-neon-blue">em</strong> São Paulo", "Eu moro <strong class="text-neon-blue">no</strong> bairro X". A preposição "em" (ou suas variações como "no", "na") é fundamental. Em inglês, para indicar um local de moradia, a preposição <strong class="text-neon-blue">"in"</strong> é a mais utilizada para regiões, cidades, estados, países e até bairros.
+            </p>
+
+            <div class="formula-box">
+                <p><strong>FÓRMULA ESSENCIAL PARA LOCALIZAÇÃO:</strong></p>
+                <p><strong class="text-neon-blue">SUJEITO + LIVE + <span class="text-yellow-300 text-2xl">IN</span> + LUGAR</strong></p>
+                <p class="text-sm text-gray-400 mt-2">
+                    <strong>Dica:</strong> Use "in" para áreas maiores ou delimitadas, como cidades, estados, países, bairros e até mesmo casas (quando o foco é o interior da casa).
+                </p>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Exemplos com Diferentes Tipos de Lugares:</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Bairro (Neighborhood)</strong> 🏘️ <span class="speaker-icon" onclick="playAudio(event, 'Neighborhood')">&#128266;</span>
+                        <br>
+                        I live <strong class="text-yellow-300">in</strong> Pinheiros. <span class="speaker-icon" onclick="playAudio(event, 'I live in Pinheiros.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Eu moro em Pinheiros.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Cidade (City)</strong> 🏙️ <span class="speaker-icon" onclick="playAudio(event, 'City')">&#128266;</span>
+                        <br>
+                        She lives <strong class="text-yellow-300">in</strong> São Paulo. <span class="speaker-icon" onclick="playAudio(event, 'She lives in São Paulo.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Ela mora em São Paulo.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Cidade Pequena (Town)</strong> 🏡 <span class="speaker-icon" onclick="playAudio(event, 'Town')">&#128266;</span>
+                        <br>
+                        They live <strong class="text-yellow-300">in</strong> a small town, like Gramado. <span class="speaker-icon" onclick="playAudio(event, 'They live in a small town, like Gramado.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Eles moram em uma cidade pequena, como Gramado.)</p>
+                    <div class="observation-box">
+                        <p class="font-bold text-neon-blue mb-1">Observação para Brasileiros:</p>
+                        <p><strong class="text-red-400">"Town"</strong> geralmente se refere a uma cidade de porte médio, menor que uma "city", mas maior que uma "village". Em português, pode ser traduzido como "cidade pequena" ou "vila".</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Vila/Povoado (Village)</strong> 🏘️ <span class="speaker-icon" onclick="playAudio(event, 'Village')">&#128266;</span>
+                        <br>
+                        He lives <strong class="text-yellow-300">in</strong> a small village, like Visconde de Mauá. <span class="speaker-icon" onclick="playAudio(event, 'He lives in a small village, like Visconde de Mauá.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Ele mora em uma vila pequena, como Visconde de Mauá.)</p>
+                    <div class="observation-box">
+                        <p class="font-bold text-neon-blue mb-1">Observação para Brasileiros:</p>
+                        <p><strong class="text-red-400">"Village"</strong> é uma localidade ainda menor que uma "town", com poucas casas, serviços limitados e uma comunidade mais unida. Em português, seria mais próximo de "vila" ou "povoado", como algumas comunidades rurais ou pequenas vilas turísticas.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Interior (Countryside / Rural area)</strong> 🌳 <span class="speaker-icon" onclick="playAudio(event, 'Countryside')">&#128266;</span>
+                        <br>
+                        He lives <strong class="text-yellow-300">in</strong> the countryside, near Ribeirão Preto. <span class="speaker-icon" onclick="playAudio(event, 'He lives in the countryside, near Ribeirão Preto.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Ele mora no interior / na área rural, perto de Ribeirão Preto.)</p>
+                    <div class="observation-box">
+                        <p class="font-bold text-neon-blue mb-1">Observação para Brasileiros:</p>
+                        <p>A palavra "interior" no sentido de área rural ou fora da cidade grande não tem uma tradução direta e única em inglês. As opções mais comuns são <strong class="text-red-400">"the countryside"</strong> (o campo, a zona rural) ou <strong class="text-red-400">"a rural area"</strong> (uma área rural). Você pode especificar a região ou cidade de referência.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Estado (State)</strong> 🗺️ <span class="speaker-icon" onclick="playAudio(event, 'State')">&#128266;</span>
+                        <br>
+                        We live <strong class="text-yellow-300">in</strong> Minas Gerais. <span class="speaker-icon" onclick="playAudio(event, 'We live in Minas Gerais.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Nós moramos em Minas Gerais.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>País (Country)</strong> 🌎 <span class="speaker-icon" onclick="playAudio(event, 'Country')">&#128266;</span>
+                        <br>
+                        I live <strong class="text-yellow-300">in</strong> Brazil. <span class="speaker-icon" onclick="playAudio(event, 'I live in Brazil.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Eu moro no Brasil.)</p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Exercício de Prática:</h3>
+            <div class="space-y-6">
+                <div class="bg-gray-800 rounded-lg p-6 border border-purple-600">
+                    <h4 class="text-xl font-bold text-purple-300 mb-4 text-left">Traduza para o Inglês, usando a fórmula correta:</h4>
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            Eu moro em <span class="text-gray-400">seu lugar</span>. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="liveExercise" class="personalized-input-blank w-64" placeholder="I live in [Your Place].">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkLiveExercise()">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="liveFeedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nova Seção 13: Minha Família e Casa -->
+        <section id="minha-familia-e-casa" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">13. Minha Família e Casa: Apresentando Seus Entes Queridos</h2>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                Aprender a falar sobre sua família é essencial para conversas pessoais e para construir relacionamentos.
+            </p>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Membros da Família Essenciais:</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Daughter</strong> <span class="speaker-icon" onclick="playAudio(event, 'Daughter')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Filha</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Son</strong> <span class="speaker-icon" onclick="playAudio(event, 'Son')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Filho</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-yellow-300">Children</strong> <span class="speaker-icon" onclick="playAudio(event, 'Children')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Filhos (plural de "child" - criança/filho/filha)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Observação Importante:</p>
+                        <p><strong class="text-red-400">"Children" é o plural irregular de "child" (criança/filho/filha). Não existe "childs" em inglês.</strong> Use "children" para se referir a dois ou mais filhos, independentemente do sexo.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Husband</strong> <span class="speaker-icon" onclick="playAudio(event, 'Husband')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Marido</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Wife</strong> <span class="speaker-icon" onclick="playAudio(event, 'Wife')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Esposa</p>
+                </div>
+                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Spouse</strong> <span class="speaker-icon" onclick="playAudio(event, 'Spouse')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Cônjuge (marido ou esposa)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Dica:</p>
+                        <p><strong class="text-red-400">"Spouse"</strong> é um termo neutro de gênero para se referir ao seu parceiro(a) casado(a). É útil em contextos formais ou quando você não quer especificar o sexo.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-yellow-300">Parents</strong> <span class="speaker-icon" onclick="playAudio(event, 'Parents')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Pais (pai e mãe)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Observação Importante:</p>
+                        <p><strong class="text-red-400">"Parents" em inglês sempre se refere a "pai e mãe" juntos.</strong> Se você quiser falar apenas sobre o pai, use "father"; apenas sobre a mãe, use "mother".</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Grandparents</strong> <span class="speaker-icon" onclick="playAudio(event, 'Grandparents')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Avós (avô e avó)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Observação:</p>
+                        <p>Assim como "parents", <strong class="text-red-400">"grandparents"</strong> se refere a ambos os avós. Para especificar, use "grandfather" (avô) ou "grandmother" (avó).</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Grandfather</strong> <span class="speaker-icon" onclick="playAudio(event, 'Grandfather')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Avô</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Grandmother</strong> <span class="speaker-icon" onclick="playAudio(event, 'Grandmother')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Avó</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Housewife</strong> <span class="speaker-icon" onclick="playAudio(event, 'Housewife')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Dona de casa</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Dica:</p>
+                        <p>Embora "housewife" seja o termo mais comum, alguns preferem "homemaker" (pessoa que cuida do lar) por ser neutro de gênero, mas "housewife" é amplamente compreendido.</p>
+                    </div>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Siblings</strong> <span class="speaker-icon" onclick="playAudio(event, 'Siblings')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Irmãos e irmãs (termo neutro para irmãos)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Dica:</p>
+                        <p>Use "siblings" quando quiser se referir a irmãos e irmãs sem especificar o sexo, como em "Do you have any siblings?" (Você tem irmãos/irmãs?).</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Animais de Estimação (Pets) 🐾:</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Pet(s)</strong> <span class="speaker-icon" onclick="playAudio(event, 'Pet')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Animal(is) de estimação</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Dog</strong> <span class="speaker-icon" onclick="playAudio(event, 'Dog')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Cachorro</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Cat</strong> <span class="speaker-icon" onclick="playAudio(event, 'Cat')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Gato</p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Frases para Apresentar a Família:</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        I have a <strong class="text-yellow-300">daughter</strong>. <span class="speaker-icon" onclick="playAudio(event, 'I have a daughter.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Eu tenho uma filha.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        I have a <strong class="text-yellow-300">son</strong>. <span class="speaker-icon" onclick="playAudio(event, 'I have a son.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Eu tenho um filho.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        I have two <strong class="text-yellow-300">children</strong>. <span class="speaker-icon" onclick="playAudio(event, 'I have two children.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Eu tenho dois filhos/duas crianças.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        This is my <strong class="text-yellow-300">husband</strong>. <span class="speaker-icon" onclick="playAudio(event, 'This is my husband.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Este é meu marido.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        This is my <strong class="text-yellow-300">wife</strong>. <span class="speaker-icon" onclick="playAudio(event, 'This is my wife.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Esta é minha esposa.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        These are my <strong class="text-yellow-300">parents</strong>. <span class="speaker-icon" onclick="playAudio(event, 'These are my parents.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Estes são meus pais.)</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        I have a <strong class="text-yellow-300">dog</strong> and a <strong class="text-yellow-300">cat</strong>. <span class="speaker-icon" onclick="playAudio(event, 'I have a dog and a cat.')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Eu tenho um cachorro e um gato.)</p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Exercícios de Prática (Família e Pets)</h3>
+            <div class="space-y-6">
+                <div class="bg-gray-800 rounded-lg p-6 border border-purple-600">
+                    <h4 class="text-xl font-bold text-purple-300 mb-4 text-left">Exercício 1: Complete a Frase</h4>
+                    <p class="text-lg text-gray-200 mb-3 text-left">
+                        Complete as frases com o membro da família ou animal de estimação correto.
+                    </p>
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            1. My brother has a little girl. She is his <input type="text" id="familyExercise1" class="personalized-input-blank w-32" placeholder="daughter">.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkFamilyExercise('familyExercise1', 'daughter', 'familyFeedback1')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="familyFeedback1"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            2. My parents have two kids, a boy and a girl. They have two <input type="text" id="familyExercise2" class="personalized-input-blank w-32" placeholder="children">.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkFamilyExercise('familyExercise2', 'children', 'familyFeedback2')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="familyFeedback2"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            3. My mom and dad are my <input type="text" id="familyExercise3" class="personalized-input-blank w-32" placeholder="parents">.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkFamilyExercise('familyExercise3', 'parents', 'familyFeedback3')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="familyFeedback3"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            4. I have a furry friend that barks. It's my <input type="text" id="familyExercise4" class="personalized-input-blank w-32" placeholder="dog">.
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-purple-600 hover:bg-purple-700" onclick="checkFamilyExercise('familyExercise4', 'dog', 'familyFeedback4')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="familyFeedback4"></div>
+                </div>
+
+                <div class="bg-gray-800 rounded-lg p-6 border border-teal-600">
+                    <h4 class="text-xl font-bold text-teal-300 mb-4 text-left">Exercício 2: Traduza as Frases</h4>
+                    <p class="text-lg text-gray-200 mb-3 text-left">
+                        Traduza as seguintes frases para o inglês.
+                    </p>
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            1. Eu tenho uma filha e um filho. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="familyTranslation1" class="personalized-input-blank w-64" placeholder="I have a daughter and a son.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-teal-600 hover:bg-teal-700" onclick="checkFamilyTranslation('familyTranslation1', 'I have a daughter and a son.', 'familyTranslationFeedback1')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="familyTranslationFeedback1"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            2. Estes são meus pais. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="familyTranslation2" class="personalized-input-blank w-64" placeholder="These are my parents.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-teal-600 hover:bg-teal-700" onclick="checkFamilyTranslation('familyTranslation2', 'These are my parents.', 'familyTranslationFeedback2')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="familyTranslationFeedback2"></div>
+
+                    <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4 mb-4 mt-6 text-left">
+                        <p class="text-xl text-green-300 font-semibold">
+                            3. Eu tenho dois animais de estimação. <span class="text-gray-400">Sua resposta:</span> <input type="text" id="familyTranslation3" class="personalized-input-blank w-64" placeholder="I have two pets.">
+                        </p>
+                    </div>
+                    <button class="show-example-button bg-teal-600 hover:bg-teal-700" onclick="checkFamilyTranslation('familyTranslation3', 'I have two pets.', 'familyTranslationFeedback3')">Verificar</button>
+                    <div class="feedback-message mt-2 text-sm" id="familyTranslationFeedback3"></div>
+                </div>
+            </div>
+        </section>
+
+        <main class="w-full max-w-4xl mx-auto">
+            <section class="section-card w-full">
+                <h2 class="text-3xl font-bold text-neon-blue mb-6">1. Vocabulário Essencial</h2>
+                <p class="text-base text-gray-300 mb-6">
+                    Aprenda as palavras-chave mais importantes para o seu dia a dia profissional. Clique para ver a tradução, exemplos e frases relacionadas.
+                </p>
+                <div id="vocabularyCardsContainer" class="space-y-4">
+                    </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Função para alternar a visibilidade do conteúdo do cartão
+        const toggleCard = (button) => {
+            const content = button.nextElementSibling;
+            const actualContent = content && content.classList.contains('mark-learned-button') ? content.nextElementSibling : content;
+            const arrowIcon = button.querySelector('.arrow-icon');
+
+            if (actualContent.classList.contains('expanded')) {
+                actualContent.classList.remove('expanded');
+                button.setAttribute('aria-expanded', 'false');
+                arrowIcon.innerHTML = '&#9660;'; // Seta para baixo
+            } else {
+                // Recolhe todos os outros cartões expandidos antes de expandir o atual
+                document.querySelectorAll('.card-content.expanded').forEach(item => {
+                    item.classList.remove('expanded');
+                    const prevButton = item.previousElementSibling;
+                    if (prevButton && prevButton.classList.contains('mark-learned-button')) {
+                        const actualPrevButton = prevButton.previousElementSibling;
+                        if (actualPrevButton && actualPrevButton.classList.contains('card-button')) {
+                            actualPrevButton.setAttribute('aria-expanded', 'false');
+                            const prevArrow = actualPrevButton.querySelector('.arrow-icon');
+                            if (prevArrow) prevArrow.innerHTML = '&#9660;';
+                        }
+                    } else if (prevButton && prevButton.classList.contains('card-button')) {
+                        prevButton.setAttribute('aria-expanded', 'false');
+                        const prevArrow = prevButton.querySelector('.arrow-icon');
+                        if (prevArrow) prevArrow.innerHTML = '&#9660;';
+                    }
+                });
+                actualContent.classList.add('expanded');
+                button.setAttribute('aria-expanded', 'true');
+                arrowIcon.innerHTML = '&#9650;'; // Seta para cima
+            }
+        };
+
+        // Função para simular a reprodução de áudio
+        const playAudio = (event, text) => {
+            event.stopPropagation(); // Impede que o clique também acione o toggle do botão pai
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                // Opcional: Você pode definir a voz, idioma, etc.
+                // utterance.lang = 'en-US'; // Define o idioma para inglês americano
+                // utterance.voice = window.speechSynthesis.getVoices().find(voice => voice.lang === 'en-US'); // Tenta encontrar uma voz em inglês americano
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Desculpe, seu navegador não suporta a síntese de fala.');
+            }
+        };
+
+        // Função para marcar um cartão como aprendido
+        const toggleLearned = (button, cardId) => {
+            button.classList.toggle('learned');
+            const isLearned = button.classList.contains('learned');
+            // Salva o estado no armazenamento local
+            localStorage.setItem(`card-${cardId}-learned`, isLearned);
+        };
+
+        // Classes de gradiente para os botões de cartão
+        const gradientClasses = [
+            'gradient-blue-purple', 'gradient-green-teal', 'gradient-orange-red', 'gradient-pink-purple',
+            'gradient-yellow-orange', 'gradient-cyan-blue', 'gradient-red-purple', 'gradient-lime-green',
+            'gradient-fuchsia-pink', 'gradient-indigo-red', 'gradient-purple-green', 'gradient-teal-pink',
+            'gradient-violet-orange', 'gradient-gold-brown', 'gradient-silver-gray', 'gradient-aqua-marine'
+        ];
+
+        // --- Dados para os Cartões ---
+
+        // Seção 1: Palavras do Vocabulário
+        const vocabularyWords = [
+            {
+                id: "vocab-work",
+                word: "Work",
+                translation: "Trabalhar",
+                icon: "💼",
+                examples: [
+                    { text: "I work (Eu trabalho)", audioText: "I work" },
+                    { text: "I worked (Eu trabalhei)", audioText: "I worked" }
+                ],
+                personalizedPractice: {
+                    phraseTemplate: "I work at [BLANK].",
+                    translationTemplate: "Eu trabalho na [nome da sua empresa].",
+                    hint: "sua empresa",
+                    rewriteTranslation: "Eu trabalho na [nome da sua empresa]." // Adicionada tradução para o rewrite
+                }
+            },
+            {
+                id: "vocab-meeting",
+                word: "Meeting",
+                translation: "Reunião",
+                icon: "🗓️",
+                examples: [
+                    { text: "I have a meeting (Eu tenho uma reunião)", audioText: "I have a meeting" },
+                    { text: "We had a meeting (Nós tivemos uma reunião)", audioText: "We had a meeting" }
+                ],
+                personalizedPractice: {
+                    phraseTemplate: "The meeting is at [BLANK] PM.",
+                    translationTemplate: "A reunião é às [hora] PM.",
+                    hint: "hora (ex: 3, 4, 5)",
+                    rewriteTranslation: "Tenho uma reunião às [hora] da tarde." // Tradução exata para o rewrite
+                }
+            },
+            {
+                id: "vocab-walk-pets",
+                word: "Walk the pets",
+                translation: "Passear com os animais de estimação",
+                icon: "🐾",
+                examples: [
+                    { text: "I walk my dog every morning.", audioText: "I walk my dog every morning." },
+                    { text: "She needs to walk her cat.", audioText: "She needs to walk her cat." }
+                ],
+                personalizedPractice: {
+                    phraseTemplate: "I [BLANK] my dog every [BLANK_2].",
+                    translationTemplate: "Eu [verbo] meu cachorro toda [período].",
+                    hint: "verbo (ex: walk), período (ex: morning)",
+                    rewriteTranslation: "Eu passeio com meu cachorro toda manhã."
+                }
+            },
+            {
+                id: "vocab-exercise",
+                word: "Exercise",
+                translation: "Fazer exercício / Exercitar-se",
+                icon: "🏋️‍♀️",
+                examples: [
+                    { text: "I exercise three times a week.", audioText: "I exercise three times a week." },
+                    { text: "He exercises to stay healthy.", audioText: "He exercises to stay healthy." }
+                ],
+                personalizedPractice: {
+                    phraseTemplate: "I [BLANK] at the [BLANK_2].",
+                    translationTemplate: "Eu [verbo] na [lugar].",
+                    hint: "verbo (ex: exercise), lugar (ex: gym)",
+                    rewriteTranslation: "Eu faço exercício na academia."
+                }
+            },
+            {
+                id: "vocab-work-in",
+                word: "Work in (Department/Area/Sector/Industry)",
+                translation: "Trabalhar em (Departamento/Área/Setor/Indústria)",
+                icon: "🏢",
+                examples: [
+                    { text: "I work in the Marketing Department.", audioText: "I work in the Marketing Department." },
+                    { text: "She works in the IT area.", audioText: "She works in the IT area." },
+                    { text: "He works in the automotive industry.", audioText: "He works in the automotive industry." }
+                ],
+                personalizedPractice: {
+                    phraseTemplate: "I work in the [BLANK] [BLANK_2].",
+                    translationTemplate: "Eu trabalho no(a) [tipo] [categoria].",
+                    hint: "tipo (ex: Marketing, IT, sales), categoria (ex: Department, area, sector, industry)",
+                    rewriteTranslation: "Eu trabalho no departamento de Marketing."
+                },
+                observation: {
+                    title: "Diferença entre 'Department' e 'Area' para Brasileiros:",
+                    text: `
+                        <p><strong class="text-neon-blue">Department:</strong> Refere-se a uma divisão formal e estruturada dentro de uma empresa, como "Human Resources Department" (Departamento de Recursos Humanos) ou "Finance Department" (Departamento Financeiro). É uma unidade organizacional bem definida.</p>
+                        <p class="mt-2"><strong class="text-neon-blue">Area:</strong> É um termo mais amplo e flexível. Pode se referir a uma "área de atuação" ou "campo de especialização" dentro ou fora de uma estrutura formal. Por exemplo, "I work in the IT area" (Eu trabalho na área de TI) pode significar que você trabalha com TI, mas não necessariamente em um "IT Department" específico. Também pode ser usado para "área de vendas" (sales area), "área de pesquisa" (research area), etc.</p>
+                        <p class="mt-2">Para "setor" ou "indústria", use <strong class="text-neon-blue">"sector"</strong> ou <strong class="text-neon-blue">"industry"</strong>, respectivamente. Ex: "I work in the financial sector." (Trabalho no setor financeiro.) "She works in the healthcare industry." (Ela trabalha na indústria da saúde.)</p>
+                    `
+                }
+            }
+        ];
+
+        // --- Funções de Carregamento de Cartões ---
+
+        function loadVocabularyCards() {
+            const container = document.getElementById('vocabularyCardsContainer');
+            container.innerHTML = '';
+            vocabularyWords.forEach((item, index) => {
+                const cardDiv = document.createElement('div');
+                cardDiv.classList.add('card-item');
+                const isLearned = localStorage.getItem(`card-${item.id}-learned`) === 'true';
+
+                const button = document.createElement('button');
+                button.classList.add('card-button', gradientClasses[index % gradientClasses.length]);
+                button.setAttribute('aria-expanded', 'false');
+                button.innerHTML = `
+                    <span>${item.icon} ${item.word} - ${item.translation}</span>
+                    <span class="arrow-icon">&#9660;</span>
+                `;
+                button.onclick = () => toggleCard(button);
+
+                const learnedButton = document.createElement('button');
+                learnedButton.classList.add('mark-learned-button');
+                learnedButton.setAttribute('title', 'Marcar como Aprendido');
+                if (isLearned) {
+                    learnedButton.classList.add('learned');
+                }
+                learnedButton.innerHTML = `
+                    <span class="text-label">✔</span>
+                    <svg class="learned-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                    </svg>
+                `;
+                learnedButton.onclick = (event) => {
+                    event.stopPropagation();
+                    toggleLearned(learnedButton, item.id);
+                };
+
+                const contentDiv = document.createElement('div');
+                contentDiv.classList.add('card-content');
+
+                let examplesHtml = '';
+                if (item.examples && item.examples.length > 0) {
+                    examplesHtml += `<p><strong>Exemplos:</strong></p><ul>`;
+                    item.examples.forEach(example => {
+                        examplesHtml += `<li>${example.text} <span class="speaker-icon" onclick="playAudio(event, '${example.audioText}')">&#128266;</span></li>`;
+                    });
+                    examplesHtml += `</ul>`;
+                }
+
+                contentDiv.innerHTML = `
+                    ${examplesHtml}
+                    <textarea class="practice-textarea" placeholder="Escreva sua própria frase usando '${item.word}' no seu contexto de trabalho..."></textarea>
+                    <div class="feedback-message mt-2 text-sm"></div>
+                `;
+
+                // Adiciona a prática personalizada se existir para o item
+                if (item.personalizedPractice) {
+                    let phraseParts = item.personalizedPractice.phraseTemplate.split(/\[BLANK_?\d*\]/); // Split by any [BLANK_N]
+                    let hintParts = item.personalizedPractice.hint.split(', ');
+
+                    let inputHtml = '';
+                    for (let i = 0; i < phraseParts.length; i++) {
+                        inputHtml += phraseParts[i];
+                        if (i < phraseParts.length - 1) {
+                            inputHtml += `<input type="text" id="personal-blank-${item.id}-${i + 1}" class="personalized-input-blank" placeholder="${hintParts[i] || '...'}" />`;
+                        }
+                    }
+
+                    const personalizedPracticeHtml = `
+                        <div class="mt-6 p-4 bg-gray-800 rounded-lg border border-teal-600">
+                            <h4 class="text-lg font-semibold text-teal-300 mb-3">Prática Personalizada: "${item.personalizedPractice.phraseTemplate.replace(/\[BLANK_?\d*\]/g, '___')}"</h4>
+                            <p class="text-gray-300 mb-3">Digite ${item.personalizedPractice.hint}:</p>
+                            <div class="fill-in-blank-sentence">
+                                ${inputHtml}
+                            </div>
+                            <p class="text-gray-400 text-sm mt-1">Tradução: ${item.personalizedPractice.translationTemplate.replace(/\[nome da sua empresa\]/g, 'o nome da sua empresa').replace(/\[hora\]/g, 'a hora').replace(/\[verbo\]/g, 'o verbo').replace(/\[período\]/g, 'o período').replace(/\[lugar\]/g, 'o lugar').replace(/\[tipo\]/g, 'o tipo').replace(/\[categoria\]/g, 'a categoria')}.</p>
+                            <div class="flex justify-center space-x-4 mt-4">
+                                <button class="show-example-button bg-blue-600 hover:bg-blue-700" onclick="checkPersonalizedBlank('${item.id}')">Verificar</button>
+                                <button class="show-example-button bg-red-600 hover:bg-red-700" onclick="resetPersonalizedBlank('${item.id}')">Resetar</button>
+                            </div>
+                            <div class="feedback-message mt-2 text-sm" id="personal-feedback-${item.id}"></div>
+
+                            <h4 class="text-lg font-semibold text-cyan-300 mt-6 mb-3">Reescreva a Frase Completa:</h4>
+                            <textarea class="practice-textarea" id="personal-rewrite-${item.id}" placeholder="Escreva a frase completa aqui, por exemplo: '${item.personalizedPractice.rewriteTranslation}'"></textarea>
+                            <p class="text-gray-400 text-sm mt-1">Tradução: ${item.personalizedPractice.rewriteTranslation}.</p>
+                            <textarea class="practice-textarea mt-2" id="personal-translation-rewrite-${item.id}" placeholder="Escreva sua tradução aqui, por exemplo: '${item.personalizedPractice.rewriteTranslation}'"></textarea>
+                            <button class="show-example-button bg-yellow-600 hover:bg-yellow-700 mt-2" onclick="checkPersonalizedTranslationRewrite('${item.id}')">Verificar Tradução</button>
+                            <button class="show-example-button bg-green-600 hover:bg-green-700" onclick="checkPersonalizedRewrite('${item.id}')">Verificar Reescrever</button>
+                            <div class="feedback-message mt-2 text-sm" id="personal-translation-rewrite-feedback-${item.id}"></div>
+                            <div class="feedback-message mt-2 text-sm" id="personal-rewrite-feedback-${item.id}"></div>
+                        </div>
+                    `;
+                    contentDiv.innerHTML += personalizedPracticeHtml;
+                }
+
+                // Adiciona a caixa de observação se existir para o item
+                if (item.observation) {
+                    const observationBox = document.createElement('div');
+                    observationBox.classList.add('observation-box');
+                    observationBox.innerHTML = `
+                        <p class="font-bold text-neon-blue mb-1">${item.observation.title}</p>
+                        ${item.observation.text}
+                    `;
+                    contentDiv.appendChild(observationBox);
+                }
+
+                cardDiv.appendChild(button);
+                cardDiv.appendChild(learnedButton);
+                cardDiv.appendChild(contentDiv);
+                container.appendChild(cardDiv);
+
+                // Carrega os valores salvos para os inputs personalizados
+                if (item.personalizedPractice) {
+                    const numBlanks = (item.personalizedPractice.phraseTemplate.match(/\[BLANK_?\d*\]/g) || []).length;
+                    for (let i = 1; i <= numBlanks; i++) {
+                        const savedValue = localStorage.getItem(`personal-value-${item.id}-${i}`);
+                        if (savedValue) {
+                            const inputElement = document.getElementById(`personal-blank-${item.id}-${i}`);
+                            if (inputElement) {
+                                inputElement.value = savedValue;
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- Funções de Prática Personalizada (agora genéricas para qualquer item) ---
+        function checkPersonalizedBlank(itemId) {
+            const item = vocabularyWords.find(v => v.id === itemId);
+            if (!item || !item.personalizedPractice) return;
+
+            const numBlanks = (item.personalizedPractice.phraseTemplate.match(/\[BLANK_?\d*\]/g) || []).length;
+            let personalizedValues = [];
+            let allBlanksFilled = true;
+
+            for (let i = 1; i <= numBlanks; i++) {
+                const inputElement = document.getElementById(`personal-blank-${itemId}-${i}`);
+                const value = inputElement ? inputElement.value.trim() : '';
+                personalizedValues.push(value);
+                if (value.length === 0) {
+                    allBlanksFilled = false;
+                }
+                localStorage.setItem(`personal-value-${itemId}-${i}`, value);
+            }
+
+            const feedbackDiv = document.getElementById(`personal-feedback-${itemId}`);
+
+            if (allBlanksFilled) {
+                let fullPhrase = item.personalizedPractice.phraseTemplate;
+                let fullTranslation = item.personalizedPractice.translationTemplate;
+
+                for (let i = 0; i < personalizedValues.length; i++) {
+                    const placeholder = i === 0 ? '[BLANK]' : `[BLANK_${i + 1}]`;
+                    fullPhrase = fullPhrase.replace(placeholder, personalizedValues[i]);
+                    
+                    // Replace placeholders in translationTemplate more dynamically
+                    const hintParts = item.personalizedPractice.hint.split(', ');
+                    if (hintParts[i]) {
+                        fullTranslation = fullTranslation.replace(`[${hintParts[i].split(' ')[0]}]`, personalizedValues[i]);
+                    }
+                }
+
+                feedbackDiv.innerHTML = `<p class="text-green-400">Ótimo! Sua frase personalizada: "${fullPhrase}".</p><p class="text-gray-400">Tradução: "${fullTranslation}".</p>`;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, preencha todos os campos: ${item.personalizedPractice.hint}.</p>`;
+            }
+        }
+
+        function resetPersonalizedBlank(itemId) {
+            const item = vocabularyWords.find(v => v.id === itemId);
+            if (!item || !item.personalizedPractice) return;
+
+            const numBlanks = (item.personalizedPractice.phraseTemplate.match(/\[BLANK_?\d*\]/g) || []).length;
+            for (let i = 1; i <= numBlanks; i++) {
+                const inputElement = document.getElementById(`personal-blank-${itemId}-${i}`);
+                if (inputElement) {
+                    inputElement.value = '';
+                    localStorage.removeItem(`personal-value-${itemId}-${i}`);
+                }
+            }
+            document.getElementById(`personal-feedback-${itemId}`).innerHTML = '';
+        }
+
+        function checkPersonalizedRewrite(itemId) {
+            const rewriteTextarea = document.getElementById(`personal-rewrite-${itemId}`);
+            const feedbackDiv = document.getElementById(`personal-rewrite-feedback-${itemId}`);
+            const userPhrase = rewriteTextarea.value.trim();
+
+            const item = vocabularyWords.find(v => v.id === itemId);
+            if (!item || !item.personalizedPractice) return;
+
+            const expectedPhrase = item.personalizedPractice.rewriteTranslation;
+
+            if (userPhrase.toLowerCase() === expectedPhrase.toLowerCase()) {
+                feedbackDiv.innerHTML = `<p class="text-green-400">✅ Perfeito! Você escreveu a frase corretamente!</p>`;
+            } else if (userPhrase.length > 0) {
+                feedbackDiv.innerHTML = `
+                    <p class="text-red-400">❌ Quase lá! A frase esperada era: "${expectedPhrase}".</p>
+                    <p class="text-yellow-400 mt-2">Sua frase: "${userPhrase}"</p>
+                `;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, tente reescrever a frase completa.</p>`;
+            }
+        }
+
+        function checkPersonalizedTranslationRewrite(itemId) {
+            const translationTextarea = document.getElementById(`personal-translation-rewrite-${itemId}`);
+            const feedbackDiv = document.getElementById(`personal-translation-rewrite-feedback-${itemId}`);
+            const userTranslation = translationTextarea.value.trim();
+
+            const item = vocabularyWords.find(v => v.id === itemId);
+            if (!item || !item.personalizedPractice) return;
+
+            const expectedTranslation = item.personalizedPractice.rewriteTranslation;
+
+            if (userTranslation.toLowerCase() === expectedTranslation.toLowerCase()) {
+                feedbackDiv.innerHTML = `<p class="text-green-400">✅ Tradução correta! Muito bem!</p>`;
+            } else if (userTranslation.length > 0) {
+                feedbackDiv.innerHTML = `
+                    <p class="text-red-400">❌ Tradução incorreta. A tradução esperada era: "${expectedTranslation}".</p>
+                    <p class="text-yellow-400 mt-2">Sua tradução: "${userTranslation}"</p>
+                `;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, tente traduzir a frase.</p>`;
+            }
+        }
+
+        // Função para a prática de diálogo geral (seção 4)
+        function checkDialoguePractice() {
+            const dialogueTextarea = document.getElementById('dialoguePracticeTextarea');
+            const feedbackDiv = document.getElementById('dialoguePracticeFeedback');
+            const dialogueContent = dialogueTextarea.value.trim();
+
+            if (dialogueContent.length > 20) { // Um mínimo de caracteres para considerar um diálogo
+                feedbackDiv.innerHTML = `<p class="text-green-400">🎉 Excelente! Seu diálogo é um ótimo começo para praticar!</p>`;
+            } else if (dialogueContent.length > 0) {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Continue escrevendo! Tente usar as frases que você aprendeu nas seções anteriores.</p>`;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-red-400">Por favor, escreva um diálogo para praticar.</p>`;
+            }
+        }
+
+        // Nova função para a prática de tradução do fim de semana (seção 7 - parte 1)
+        function checkWeekendTranslation() {
+            const translationTextarea = document.getElementById('weekendTranslationTextarea');
+            const feedbackDiv = document.getElementById('weekendTranslationFeedback');
+            const userTranslation = translationTextarea.value.trim().toLowerCase();
+            const expectedTranslation = "how was your weekend? nothing much! just the basics.";
+
+            if (userTranslation === expectedTranslation) {
+                feedbackDiv.innerHTML = `<p class="text-green-400">✅ Tradução correta! Muito bem!</p>`;
+            } else if (userTranslation.length > 0) {
+                feedbackDiv.innerHTML = `
+                    <p class="text-red-400">❌ Tradução incorreta. A tradução esperada era: "How was your weekend? Nothing much! Just the basics."</p>
+                    <p class="text-yellow-400 mt-2">Sua tradução: "${userTranslation}"</p>
+                `;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, tente traduzir a frase.</p>`;
+            }
+        }
+
+        // Nova função para a prática de resposta com atividades (seção 7 - parte 2)
+        function checkWeekendResponse() {
+            const weekendResponseTextarea = document.getElementById('weekendResponseTextarea');
+            const feedbackDiv = document.getElementById('weekendResponseFeedback');
+            const userResponse = weekendResponseTextarea.value.trim().toLowerCase();
+
+            // Lista de atividades da seção 6 para verificação
+            const activities = [
+                "relax at home", "chill out at home", "visit my parents", "pay a visit to my parents",
+                "watch tv/series", "catch up on my tv series", "catch up on some netflix",
+                "go out for dinner", "dine out", "go to the gym", "work out in the gym",
+                "go shopping", "read a book", "catch up on a book", "run errands"
+            ];
+
+            let foundActivitiesCount = 0;
+            activities.forEach(activity => {
+                if (userResponse.includes(activity)) {
+                    foundActivitiesCount++;
+                }
+            });
+
+            if (foundActivitiesCount >= 3) {
+                feedbackDiv.innerHTML = `<p class="text-green-400">🎉 Excelente! Você incluiu ${foundActivitiesCount} atividades em sua resposta!</p>`;
+            } else if (userResponse.length > 0) {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Sua resposta é boa, mas tente incluir pelo menos 3 atividades da seção 6. Você incluiu ${foundActivitiesCount}.</p>`;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-red-400">Por favor, escreva sua resposta incluindo atividades do fim de semana.</p>`;
+            }
+        }
+
+        // Funções para os novos exercícios de Pronome de Preenchimento de Lacunas (já existentes)
+        function checkPronounExercise(inputId, expectedPronoun, feedbackId) {
+            const inputElement = document.getElementById(inputId);
+            const feedbackDiv = document.getElementById(feedbackId);
+            const userAnswer = inputElement.value.trim();
+
+            // Handle 'I' special case for capitalization check
+            if (expectedPronoun === 'I') {
+                if (userAnswer === 'I') {
+                    feedbackDiv.innerHTML = `<p class="text-green-400">✅ Correto!</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `
+                        <p class="text-red-400">❌ Incorreto. A resposta esperada era: "${expectedPronoun}" (lembre-se que 'I' é sempre maiúsculo).</p>
+                        <p class="text-yellow-400 mt-2">Sua resposta: "${userAnswer}"</p>
+                    `;
+                }
+            } else {
+                if (userAnswer.toLowerCase() === expectedPronoun.toLowerCase()) {
+                    feedbackDiv.innerHTML = `<p class="text-green-400">✅ Correto!</p>`;
+                } else if (userAnswer.length > 0) {
+                    feedbackDiv.innerHTML = `
+                        <p class="text-red-400">❌ Incorreto. A resposta esperada era: "${expectedPronoun}"</p>
+                        <p class="text-yellow-400 mt-2">Sua resposta: "${userAnswer}"</p>
+                    `;
+                } else {
+                    feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, preencha o exercício.</p>`;
+                }
+            }
+        }
+
+        // Nova função para exercícios de "It" impessoal
+        function checkItExercise(inputId, expectedAnswer, feedbackId) {
+            const inputElement = document.getElementById(inputId);
+            const feedbackDiv = document.getElementById(feedbackId);
+            const userAnswer = inputElement.value.trim();
+
+            // Normaliza a resposta esperada para comparação, removendo pontuações e tornando minúscula
+            const normalizedExpected = expectedAnswer.toLowerCase().replace(/[.,!?;:]/g, '');
+            const normalizedUserAnswer = userAnswer.toLowerCase().replace(/[.,!?;:]/g, '');
+
+            if (normalizedUserAnswer === normalizedExpected) {
+                feedbackDiv.innerHTML = `<p class="text-green-400">✅ Correto! Muito bem!</p>`;
+            } else if (userAnswer.length > 0) {
+                feedbackDiv.innerHTML = `
+                    <p class="text-red-400">❌ Incorreto. A resposta esperada era: "${expectedAnswer}"</p>
+                    <p class="text-yellow-400 mt-2">Sua resposta: "${userAnswer}"</p>
+                `;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, tente traduzir a frase.</p>`;
+            }
+        }
+
+        // --- Drag and Drop Pronoun Exercise Logic ---
+        const dragDropQuestions = [
+            { nounPhrase: "John", correctPronoun: "He" },
+            { nounPhrase: "Mary", correctPronoun: "She" },
+            { nounPhrase: "The dog", correctPronoun: "It" },
+            { nounPhrase: "The books", correctPronoun: "They" },
+            { nounPhrase: "You and I", correctPronoun: "We" },
+            { nounPhrase: "You", correctPronoun: "You" }, // Singular
+            { nounPhrase: "You all", correctPronoun: "You" }, // Plural
+            { nounPhrase: "My computer", correctPronoun: "It" },
+            { nounPhrase: "My parents", correctPronoun: "They" },
+            { nounPhrase: "My sister and I", correctPronoun: "We" },
+            { nounPhrase: "A chair", correctPronoun: "It" },
+            { nounPhrase: "The chairs", correctPronoun: "They" },
+            { nounPhrase: "Mr. Smith", correctPronoun: "He" },
+            { nounPhrase: "Ms. Davis", correctPronoun: "She" },
+            { nounPhrase: "The children", correctPronoun: "They" },
+            { nounPhrase: "An idea", correctPronoun: "It" },
+            { nounPhrase: "The ideas", correctPronoun: "They" },
+            { nounPhrase: "My boss (male)", correctPronoun: "He" },
+            { nounPhrase: "My boss (female)", correctPronoun: "She" },
+            { nounPhrase: "The team", correctPronoun: "It" } // Collective noun often takes "It" in American English
+        ];
+
+        let currentDragDropAnswers = {}; // To store user's drops
+
+        function renderDragDropExercise() {
+            const leftColumn = document.getElementById('dragDropLeftColumn');
+            const rightColumn = document.getElementById('dragDropRightColumn');
+            leftColumn.innerHTML = ''; // Clear existing content
+            rightColumn.innerHTML = '<p class="w-full text-center text-lg text-neon-blue font-bold mb-3">Arraste os pronomes:</p>'; // Re-add title
+
+            currentDragDropAnswers = {};
+
+            const pronouns = ["I", "You", "He", "She", "It", "We", "They"];
+            const shuffledPronouns = [...pronouns].sort(() => Math.random() - 0.5); // Shuffle for draggable items
+
+            dragDropQuestions.forEach((q, index) => {
+                const row = document.createElement('div');
+                row.classList.add('drag-drop-item-row');
+
+                const nounSpan = document.createElement('span');
+                nounSpan.classList.add('text-lg', 'text-gray-200', 'font-medium', 'text-right');
+                nounSpan.textContent = `${index + 1}. ${q.nounPhrase}:`;
+                row.appendChild(nounSpan);
+
+                const targetDiv = document.createElement('div');
+                targetDiv.classList.add('droppable-target');
+                targetDiv.id = `drop-target-${index}`;
+                targetDiv.dataset.correctPronoun = q.correctPronoun;
+                targetDiv.ondragover = allowDrop;
+                targetDiv.ondrop = drop;
+                targetDiv.ondragleave = leaveDrop; // Add dragleave event
+                row.appendChild(targetDiv);
+
+                leftColumn.appendChild(row);
+            });
+
+            shuffledPronouns.forEach((p, pIndex) => {
+                const draggableSpan = document.createElement('span');
+                draggableSpan.classList.add('draggable-item');
+                draggableSpan.setAttribute('draggable', 'true');
+                draggableSpan.id = `drag-item-${pIndex}`;
+                draggableSpan.textContent = p;
+                draggableSpan.ondragstart = drag;
+                rightColumn.appendChild(draggableSpan);
+            });
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+            ev.target.classList.add('drag-over');
+        }
+
+        function leaveDrop(ev) {
+            ev.target.classList.remove('drag-over');
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            ev.target.classList.remove('drag-over');
+            const data = ev.dataTransfer.getData("text");
+            const draggedElement = document.getElementById(data);
+            const rightColumn = document.getElementById('dragDropRightColumn');
+
+            // If the target already has content, put it back to the right column
+            if (ev.target.hasChildNodes()) {
+                const existingChild = ev.target.firstChild;
+                existingChild.style.display = 'block';
+                existingChild.classList.remove('hidden');
+                rightColumn.appendChild(existingChild);
+                // Remove the old answer from tracking
+                for (const key in currentDragDropAnswers) {
+                    if (currentDragDropAnswers[key] === existingChild.textContent) {
+                        currentDragDropAnswers[key] = null;
+                        break;
+                    }
+                }
+            }
+            
+            ev.target.appendChild(draggedElement);
+            draggedElement.style.display = 'block';
+            draggedElement.classList.remove('hidden');
+            
+            // Store the dropped answer
+            currentDragDropAnswers[ev.target.id] = draggedElement.textContent;
+
+            // Remove any previous feedback classes
+            ev.target.classList.remove('correct', 'incorrect');
+        }
+
+        function checkDragDropAnswers() {
+            let correctCount = 0;
+            let totalQuestions = dragDropQuestions.length;
+            const feedbackDiv = document.getElementById('dragDropFeedback');
+
+            dragDropQuestions.forEach((q, index) => {
+                const targetDiv = document.getElementById(`drop-target-${index}`);
+                const droppedPronoun = targetDiv.textContent.trim();
+                const correctPronoun = targetDiv.dataset.correctPronoun;
+
+                targetDiv.classList.remove('correct', 'incorrect', 'filled');
+                if (droppedPronoun.toLowerCase() === correctPronoun.toLowerCase()) {
+                    targetDiv.classList.add('correct', 'filled');
+                    correctCount++;
+                } else if (droppedPronoun.length > 0) {
+                    targetDiv.classList.add('incorrect', 'filled');
+                } else {
+                    targetDiv.classList.remove('filled'); // Not filled, no feedback for empty
+                }
+            });
+
+            if (correctCount === totalQuestions) {
+                feedbackDiv.innerHTML = `<p class="text-green-400 text-xl font-bold">🎉 Parabéns! Você acertou todas as ${correctCount} questões!</p>`;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400 text-lg font-bold">Você acertou ${correctCount} de ${totalQuestions} questões. Continue praticando!</p>`;
+            }
+        }
+
+        function resetDragDropExercise() {
+            renderDragDropExercise(); // Re-render the exercise to reset everything
+            document.getElementById('dragDropFeedback').innerHTML = ''; // Clear feedback
+        }
+
+        // Função para o exercício de idade
+        function checkAgeExercise() {
+            const ageInput = document.getElementById('ageExercise');
+            const feedbackDiv = document.getElementById('ageFeedback');
+            const userAnswer = ageInput.value.trim();
+
+            // Tenta extrair a idade do input, se for um número
+            const ageMatch = userAnswer.match(/\d+/);
+            const userAge = ageMatch ? parseInt(ageMatch[0]) : null;
+
+            if (userAge && !isNaN(userAge)) {
+                // Se o usuário digitou a idade, construa a resposta esperada com essa idade
+                const expectedAnswer = `I am ${userAge} years old.`;
+                if (userAnswer.toLowerCase() === expectedAnswer.toLowerCase()) {
+                    feedbackDiv.innerHTML = `<p class="text-green-400">✅ Correto! Muito bem!</p>`;
+                } else {
+                    feedbackDiv.innerHTML = `
+                        <p class="text-red-400">❌ Incorreto. A resposta esperada era: "${expectedAnswer}"</p>
+                        <p class="text-yellow-400 mt-2">Sua resposta: "${userAnswer}"</p>
+                    `;
+                }
+            } else if (userAnswer.length > 0) {
+                 feedbackDiv.innerHTML = `
+                    <p class="text-red-400">❌ Incorreto. Por favor, insira sua idade e a frase completa no formato "I am X years old."</p>
+                    <p class="text-yellow-400 mt-2">Sua resposta: "${userAnswer}"</p>
+                `;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, preencha sua idade para praticar.</p>`;
+            }
+        }
+
+        // Função para o exercício de localização
+        function checkLiveExercise() {
+            const liveInput = document.getElementById('liveExercise');
+            const feedbackDiv = document.getElementById('liveFeedback');
+            const userAnswer = liveInput.value.trim();
+
+            if (userAnswer.toLowerCase().startsWith('i live in ')) {
+                feedbackDiv.innerHTML = `<p class="text-green-400">✅ Correto! Você usou a estrutura e a preposição corretas!</p>`;
+            } else if (userAnswer.length > 0) {
+                feedbackDiv.innerHTML = `
+                    <p class="text-red-400">❌ Incorreto. Lembre-se da fórmula: "I live <strong class="text-yellow-300">in</strong> [seu lugar]".</p>
+                    <p class="text-yellow-400 mt-2">Sua resposta: "${userAnswer}"</p>
+                `;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, preencha onde você mora para praticar.</p>`;
+            }
+        }
+
+        // Funções para os novos exercícios de Família e Pets
+        function checkFamilyExercise(inputId, expectedAnswer, feedbackId) {
+            const inputElement = document.getElementById(inputId);
+            const feedbackDiv = document.getElementById(feedbackId);
+            const userAnswer = inputElement.value.trim();
+
+            if (userAnswer.toLowerCase() === expectedAnswer.toLowerCase()) {
+                feedbackDiv.innerHTML = `<p class="text-green-400">✅ Correto!</p>`;
+            } else if (userAnswer.length > 0) {
+                feedbackDiv.innerHTML = `
+                    <p class="text-red-400">❌ Incorreto. A resposta esperada era: "${expectedAnswer}"</p>
+                    <p class="text-yellow-400 mt-2">Sua resposta: "${userAnswer}"</p>
+                `;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, preencha o exercício.</p>`;
+            }
+        }
+
+        function checkFamilyTranslation(inputId, expectedAnswer, feedbackId) {
+            const inputElement = document.getElementById(inputId);
+            const feedbackDiv = document.getElementById(feedbackId);
+            const userAnswer = inputElement.value.trim();
+
+            // Normaliza a resposta esperada para comparação, removendo pontuações e tornando minúscula
+            const normalizedExpected = expectedAnswer.toLowerCase().replace(/[.,!?;:]/g, '');
+            const normalizedUserAnswer = userAnswer.toLowerCase().replace(/[.,!?;:]/g, '');
+
+            if (normalizedUserAnswer === normalizedExpected) {
+                feedbackDiv.innerHTML = `<p class="text-green-400">✅ Tradução correta! Muito bem!</p>`;
+            } else if (userAnswer.length > 0) {
+                feedbackDiv.innerHTML = `
+                    <p class="text-red-400">❌ Tradução incorreta. A tradução esperada era: "${expectedAnswer}"</p>
+                    <p class="text-yellow-400 mt-2">Sua tradução: "${userTranslation}"</p>
+                `;
+            } else {
+                feedbackDiv.innerHTML = `<p class="text-yellow-400">Por favor, tente traduzir a frase.</p>`;
+            }
+        }
+
+        // Function to generate the table of contents
+        function generateTableOfContents() {
+            const tocList = document.getElementById('tableOfContentsList');
+            tocList.innerHTML = ''; // Clear existing TOC items
+
+            // Get all section cards
+            const sections = document.querySelectorAll('section.section-card');
+
+            sections.forEach(section => {
+                const heading = section.querySelector('h2');
+                if (heading) {
+                    const sectionTitle = heading.textContent;
+                    // Create a slug from the title for the ID
+                    const sectionId = sectionTitle.toLowerCase()
+                                                .replace(/[^a-z0-9\s-]/g, '') // Remove non-alphanumeric chars except space and hyphen
+                                                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                                                .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+
+                    // Set the ID for the section if it doesn't already have one
+                    if (!section.id) {
+                        section.id = sectionId;
+                    }
+
+                    // Create the list item for the TOC
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = `#${section.id}`;
+                    link.textContent = sectionTitle;
+                    listItem.appendChild(link);
+                    tocList.appendChild(listItem);
+                }
+            });
+        }
+
+
+        // Carrega todos os cartões e elementos interativos ao carregar o DOM
+        document.addEventListener('DOMContentLoaded', () => {
+            loadVocabularyCards();
+            renderDragDropExercise(); // Render the drag and drop exercise
+            generateTableOfContents(); // Generate the table of contents
+        });
+    </script>
+</body>
+</html>
