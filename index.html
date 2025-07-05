@@ -346,14 +346,25 @@
 
         <!-- Table of Contents Section -->
         <nav class="toc-container w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">Índice</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">Table of Contents</h2>
             <ul class="toc-list" id="tableOfContentsList">
                 <!-- TOC items will be dynamically generated here by JavaScript -->
             </ul>
         </nav>
 
+        <!-- Nova Seção: Nota Importante para Profissionais -->
+        <section id="nota-para-profissionais" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">Nota Importante para Profissionais</h2>
+            <div class="observation-box border-green-500">
+                <p class="font-bold text-green-400 mb-2">Tranquilidade nas Reuniões:</p>
+                <p class="text-lg text-gray-200">
+                    Todas as expressões e frases apresentadas neste kit foram cuidadosamente selecionadas para serem <strong class="text-neon-blue">apropriadas e seguras para uso em ambientes profissionais e reuniões</strong>. Mesmo as formas mais informais, quando indicadas, são comuns e aceitas em muitos contextos corporativos modernos (especialmente em empresas com cultura mais flexível ou em conversas com colegas). Sinta-se à vontade para praticar e aplicar o que aprender aqui para se comunicar com confiança no seu dia a dia de trabalho!
+                </p>
+            </div>
+        </section>
+
         <section id="cumprimentos-hi-there" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">Cumprimentos: "Hi there"</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">1. Cumprimentos: "Hi there"</h2>
             <p class="text-base text-gray-300 mb-4 text-left">
                 A expressão <strong class="text-neon-blue">"Hi there"</strong> é uma forma informal e amigável de cumprimentar alguém em inglês. Ela pode ser traduzida para o português brasileiro como:
             </p>
@@ -385,12 +396,14 @@
                     <strong>Hi there! How are you doing?</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hi there! How are you doing?')">&#128266;</span>
                 </p>
                 <p class="text-gray-400">(Oi! Como você está?)</p>
+                <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Bom para iniciar conversas informais antes ou depois da reunião, especialmente com colegas próximos.</p>
             </div>
             <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                 <p class="text-lg text-green-300 font-semibold">
                     <strong>Hi, there! How is it going?</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hi there! How is it going?')">&#128266;</span>
                 </p>
                 <p class="text-gray-400">(Oi! Como vai? / Como as coisas estão indo?)</p>
+                <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Comum para quebrar o gelo no início de reuniões, especialmente com equipes já familiarizadas.</p>
             </div>
             <p class="text-gray-300 mt-4 text-left">
                 Ambas as frases, "How are you doing?" e "How is it going?", são formas comuns e intercambiáveis de perguntar "Como você está?" ou "Como as coisas estão indo?". Você pode usá-las em situações informais com amigos, colegas de trabalho ou conhecidos.
@@ -408,18 +421,21 @@
                         <strong>I am doing fine.</strong> <span class="speaker-icon" onclick="playAudio(event, 'I am doing fine.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Estou bem. / Estou indo bem.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Resposta neutra e segura para qualquer contexto de reunião.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>I am doing good.</strong> <span class="speaker-icon" onclick="playAudio(event, 'I am doing good.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Estou bem. / Estou indo bem. - Uso comum, mas "fine" é gramaticalmente mais correto para estado.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Aceitável em reuniões informais ou com colegas. Evite em contextos muito formais.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>I am doing great.</strong> <span class="speaker-icon" onclick="playAudio(event, 'I am doing great.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Estou ótimo(a)! / Estou indo muito bem!)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Ótima para transmitir energia positiva no início de reuniões.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
@@ -430,6 +446,7 @@
                         <p class="font-bold text-neon-blue mb-1">Observação:</p>
                         <p>A expressão "I am well" é mais utilizada para indicar que você está bem de saúde, ou seja, "saúde em caixa". É uma resposta mais formal e específica sobre o seu bem-estar físico.</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Adequada para reuniões formais, pois é uma resposta mais polida.</p>
                 </div>
             </div>
         </section>
@@ -449,12 +466,334 @@
                         <p class="font-bold text-neon-blue mb-1">Observação:</p>
                         <p>"Yourself" é um pronome reflexivo que, neste contexto, funciona como uma forma mais direta e concisa de perguntar "E quanto a você?" ou "E você?". Em português, ele substitui a necessidade de usar "o senhor" ou "a senhora", mantendo a informalidade e a fluidez da conversa. É uma forma educada de retornar a pergunta.</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Muito apropriada para manter a cordialidade e engajamento no início de qualquer reunião.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nova Seção: Informações Adicionais: Outras Formas de Cumprimento -->
+        <section id="informacoes-adicionais-cumprimentos" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">4. Informações Adicionais: Outras Formas de Cumprimento</h2>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                Além das saudações básicas, é útil conhecer outras formas de cumprimentar em inglês, que variam conforme a informalidade e o período do dia.
+            </p>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Cumprimentos Informais Adicionais:</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Hey!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hey!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Ei! / Olá!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Muito informal e comum entre amigos, colegas próximos ou pessoas da mesma idade. Pode ser usado para chamar a atenção de alguém também.</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Evite em reuniões formais. Use apenas em ambientes muito descontraídos ou com colegas de extrema confiança.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Hiya!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hiya!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Oi! / Olá! - Mais comum no inglês britânico)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Uma forma ainda mais informal e amigável de "Hi". É bastante usada no Reino Unido e em algumas regiões dos EUA. Transmite um tom muito descontraído.</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Geralmente muito informal para reuniões. Melhor evitar.</p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Cumprimentos por Período do Dia:</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Good morning!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Good morning!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Bom dia!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Usado desde o momento em que você acorda até o meio-dia (12:00 PM).</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Essencial e amplamente aceito para iniciar reuniões pela manhã.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Good afternoon!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Good afternoon!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Boa tarde!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Usado do meio-dia (12:00 PM) até o início da noite (por volta das 5-6 PM).</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Essencial e amplamente aceito para iniciar reuniões à tarde.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Good evening!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Good evening!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Boa noite! - Ao chegar/encontrar)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Usado a partir do início da noite (após as 5-6 PM) e durante toda a noite, <strong class="text-red-400">quando você está chegando a um lugar ou encontrando alguém.</strong></p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Adequado para iniciar reuniões à noite ou em videochamadas com fusos horários diferentes.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong class="text-red-400">Good night!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Good night!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Boa noite! - Ao se despedir)</p>
+                    <div class="observation-box mt-2 border-red-500">
+                        <p class="font-bold text-red-400 mb-1">⚠️ ATENÇÃO: NÃO COMETA ESTE ERRO!</p>
+                        <p><strong class="text-red-400">"Good night" NUNCA é usado como cumprimento ao chegar ou encontrar alguém.</strong> Ele é <strong class="text-red-400">EXCLUSIVAMENTE</strong> uma forma de despedida, como "Tenha uma boa noite" ou "Vou dormir".</p>
+                        <p class="mt-2">Ex: Se você chega a uma festa às 8 PM, diga "Good evening". Se você vai embora da festa às 11 PM, diga "Good night".</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use apenas para se despedir no final de uma reunião noturna, especialmente se a pessoa for descansar em breve.</p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Cumprimentando Grupos (Situações de Negócios e Informais):</h3>
+            <p class="text-base text-gray-300 mb-4 text-left">
+                Ao se dirigir a um grupo de pessoas, você tem algumas opções:
+            </p>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Hi guys!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hi guys!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Oi, pessoal! / Oi, galera!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Muito comum e amplamente aceito em ambientes informais e semi-formais (como startups, equipes de tecnologia). Embora "guys" possa soar masculino, ele é usado de forma <strong class="text-neon-blue">neutra para gênero</strong> ao se referir a um grupo de pessoas (homens e mulheres). É descontraído e amigável.</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Comum em reuniões informais ou com equipes já estabelecidas. Evite em reuniões muito formais ou com clientes novos.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Hello guys!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hello guys!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Olá, pessoal! / Olá, galera!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Similar a "Hi guys!", mas com um tom ligeiramente mais formal que "Hi". Também é <strong class="text-neon-blue">neutro para gênero</strong>.</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Aceitável em reuniões informais a semi-formais. Mais polido que "Hi guys!".</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Hi everyone!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hi everyone!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Oi a todos! / Olá a todos!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Esta é uma saudação <strong class="text-neon-blue">universalmente apropriada e formal</strong> para qualquer grupo, em qualquer situação, incluindo ambientes de negócios mais tradicionais. É sempre uma escolha segura.</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Ideal para qualquer tipo de reunião, especialmente as formais ou com um público desconhecido.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Hello everyone!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Hello everyone!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Olá a todos!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Mais formal que "Hi everyone!", também é uma opção segura e educada para cumprimentar um grupo.</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Perfeito para iniciar qualquer reunião, transmitindo profissionalismo e respeito.</p>
+                </div>
+            </div>
+
+            <div class="observation-box mt-6">
+                <p class="font-bold text-neon-blue mb-1">Relembrando a Neutralidade de Gênero:</p>
+                <p>É importante reforçar que <strong class="text-neon-blue">"Hi there"</strong> e <strong class="text-neon-blue">"Hi guys"</strong> (e suas variações com "Hello") são usados para <strong class="text-neon-blue">ambos os sexos</strong> em inglês. Não se preocupe em parecer informal demais ao usar "guys" para um grupo misto ou feminino; é uma prática comum e aceita.</p>
+            </div>
+        </section>
+
+        <!-- Nova Seção: Despedidas Comuns -->
+        <section id="despedidas-comuns" class="section-card w-full max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">5. Despedidas Comuns</h2>
+            <p class="text-base text-gray-300 mb-6 text-left">
+                Assim como os cumprimentos, as despedidas em inglês têm suas nuances e variações.
+            </p>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Despedidas Informais:</h3>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Ciya!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Ciya!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Tchau! / Até mais! - Forma bem casual de "See you")</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Uma forma muito informal e abreviada de "See you". É como o nosso "Falou!" ou "Até!" entre amigos bem próximos.</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Demasiado informal. Evite em reuniões.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>See you!</strong> <span class="speaker-icon" onclick="playAudio(event, 'See you!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Até mais! / Te vejo!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Forma comum e versátil de despedida. Implica que vocês se verão novamente, mas sem especificar quando ou onde.</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Aceitável para finalizar reuniões, especialmente com colegas.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>See you then!</strong> <span class="speaker-icon" onclick="playAudio(event, 'See you then!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Até lá! / Te vejo então!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Usado quando há um evento ou encontro futuro já combinado. É como "Nos vemos na hora combinada!"</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Ótimo para confirmar o próximo encontro ou reunião no final da conversa.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>See you there!</strong> <span class="speaker-icon" onclick="playAudio(event, 'See you there!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Te vejo lá!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Usado quando vocês combinaram de se encontrar em um local específico. É como "Nos vemos no lugar combinado!"</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Adequado quando a reunião termina e vocês se encontrarão em outro local logo em seguida.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>See you later!</strong> <span class="speaker-icon" onclick="playAudio(event, 'See you later!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Até mais tarde! / Te vejo mais tarde!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Muito comum para quando você espera ver a pessoa novamente no mesmo dia.</p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Comum e apropriado para finalizar reuniões, especialmente se houver outra interação no mesmo dia.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>See you tomorrow!</strong> <span class="speaker-icon" onclick="playAudio(event, 'See you tomorrow!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Até amanhã!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Padrão "See you [Tempo]":</p>
+                        <p>Você pode facilmente adaptar "See you" com diferentes expressões de tempo:</p>
+                        <ul class="list-disc list-inside ml-4 mt-1">
+                            <li><strong class="text-neon-blue">See you soon!</strong> (Até breve!) <span class="speaker-icon" onclick="playAudio(event, 'See you soon!')">&#128266;</span></li>
+                            <li><strong class="text-neon-blue">See you next week!</strong> (Até a próxima semana!) <span class="speaker-icon" onclick="playAudio(event, 'See you next week!')">&#128266;</span></li>
+                            <li><strong class="text-neon-blue">See you in a while!</strong> (Até daqui a pouco! / Te vejo em um tempo!) <span class="speaker-icon" onclick="playAudio(event, 'See you in a while!')">&#128266;</span></li>
+                            <li><strong class="text-neon-blue">See you on Monday!</strong> (Até segunda-feira!) <span class="speaker-icon" onclick="playAudio(event, 'See you on Monday!')">&#128266;</span></li>
+                        </ul>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Muito útil para agendamento e despedida, especialmente com colegas de equipe.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Catch you later!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Catch you later!')">&#128266;</span>
+                        <button class="advanced-button" onclick="alert('Esta é uma forma mais informal e coloquial de dizer "See you later".')">Inglês Avançado</button>
+                    </p>
+                    <p class="text-gray-400">(Te pego mais tarde! / A gente se fala mais tarde!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Uso:</p>
+                        <p>Uma expressão mais coloquial e informal, comum entre nativos. É como "A gente se fala/vê depois". Você pode usar "Catch you [tempo]" da mesma forma que "See you [tempo]".</p>
+                        <ul class="list-disc list-inside ml-4 mt-1">
+                            <li><strong class="text-neon-blue">Catch you tomorrow!</strong> (A gente se fala amanhã!) <span class="speaker-icon" onclick="playAudio(event, 'Catch you tomorrow!')">&#128266;</span></li>
+                        </ul>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Geralmente muito informal para reuniões. Melhor evitar, a menos que o ambiente seja extremamente casual.</p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Desejos de Despedida (Mais Formais e Cordiais):</h3>
+            <p class="text-base text-gray-300 mb-4 text-left">
+                Essas frases são ótimas para finalizar uma conversa de forma educada e cordial.
+            </p>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Have a nice day!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Have a nice day!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Tenha um bom dia!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Opcional "Ahead":</p>
+                        <p>Você pode adicionar "<strong class="text-neon-blue">ahead</strong>" (à frente) para enfatizar que você deseja um bom dia para o período que ainda está por vir. É mais comum em inglês americano e em contextos de atendimento ao cliente, mas não é obrigatório.</p>
+                        <p class="mt-1">Ex: "Have a nice day <strong class="text-yellow-300">ahead</strong>!" <span class="speaker-icon" onclick="playAudio(event, 'Have a nice day ahead!')">&#128266;</span></p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Muito comum e profissional para finalizar reuniões, especialmente com clientes ou parceiros.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold flex items-center">
+                        <strong>Have a nice weekend!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Have a nice weekend!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Tenha um bom fim de semana!)</p>
+                    <div class="observation-box mt-2">
+                        <p class="font-bold text-neon-blue mb-1">Opcional "Ahead":</p>
+                        <p>Assim como "day", "ahead" pode ser usado para reforçar que o desejo é para o fim de semana que está começando. "Have a nice weekend <strong class="text-yellow-300">ahead</strong>!" <span class="speaker-icon" onclick="playAudio(event, 'Have a nice weekend ahead!')">&#128266;</span></p>
+                    </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Ideal para finalizar reuniões na quinta ou sexta-feira.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Have a nice trip!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Have a nice trip!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Tenha uma boa viagem!)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use se souber que alguém da reunião fará uma viagem em breve.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Have a nice holiday!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Have a nice holiday!')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">(Tenha um bom feriado! / Boas férias!)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use antes de feriados ou se alguém for sair de férias.</p>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Sinônimos para "Nice":</h3>
+            <p class="text-base text-gray-300 mb-4 text-left">
+                Para variar seu vocabulário e soar mais natural, você pode substituir "nice" por outros adjetivos:
+            </p>
+            <div class="space-y-4 text-left">
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Lovely</strong> <span class="speaker-icon" onclick="playAudio(event, 'Lovely')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Adorável, agradável, lindo(a)</p>
+                    <p class="text-gray-400 italic mt-1">Ex: "Have a <strong class="text-yellow-300">lovely</strong> day!" <span class="speaker-icon" onclick="playAudio(event, 'Have a lovely day!')">&#128266;</span></p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Adequado para finalizar reuniões, adiciona um toque mais caloroso.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Great</strong> <span class="speaker-icon" onclick="playAudio(event, 'Great')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Ótimo(a), excelente</p>
+                    <p class="text-gray-400 italic mt-1">Ex: "Have a <strong class="text-yellow-300">great</strong> weekend!" <span class="speaker-icon" onclick="playAudio(event, 'Have a great weekend!')">&#128266;</span></p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Muito bom para finalizar reuniões, expressa um desejo mais forte de sucesso ou prazer.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Wonderful</strong> <span class="speaker-icon" onclick="playAudio(event, 'Wonderful')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Maravilhoso(a)</p>
+                    <p class="text-gray-400 italic mt-1">Ex: "Have a <strong class="text-yellow-300">wonderful</strong> trip!" <span class="speaker-icon" onclick="playAudio(event, 'Have a wonderful trip!')">&#128266;</span></p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Similar a 'great', transmite um desejo muito positivo. Use para viagens ou feriados.</p>
+                </div>
+                <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
+                    <p class="text-lg text-green-300 font-semibold">
+                        <strong>Pleasant</strong> <span class="speaker-icon" onclick="playAudio(event, 'Pleasant')">&#128266;</span>
+                    </p>
+                    <p class="text-gray-400">Tradução: Agradável</p>
+                    <p class="text-gray-400 italic mt-1">Ex: "Have a <strong class="text-yellow-300">pleasant</strong> evening!" <span class="speaker-icon" onclick="playAudio(event, 'Have a pleasant evening!')">&#128266;</span></p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Mais formal e polido que 'nice', ideal para reuniões com clientes ou superiores.</p>
                 </div>
             </div>
         </section>
 
         <section id="pratica-de-dialogo" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">4. Prática de Diálogo</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">6. Prática de Diálogo</h2>
             <p class="text-base text-gray-300 mb-6">
                 Agora é a sua vez! Crie um pequeno diálogo usando as expressões que você aprendeu nas seções anteriores (cumprimentos, respostas e perguntas de acompanhamento).
             </p>
@@ -466,7 +805,7 @@
         </section>
 
         <section id="perguntas-sobre-o-fim-de-semana" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">5. Perguntas sobre o Fim de Semana</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">7. Perguntas sobre o Fim de Semana</h2>
             <p class="text-base text-gray-300 mb-6">
                 Aprenda a perguntar sobre o fim de semana de forma casual.
             </p>
@@ -482,6 +821,7 @@
                         <span class="font-bold">weekend</span> = fim de semana <br>
                         <span class="font-bold">Tradução:</span> Como foi o fim de semana?
                     </p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Muito comum para iniciar conversas informais no início da semana, antes da pauta principal.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -505,6 +845,7 @@
                             <li>"How did your presentation go?" (Como foi sua apresentação?)</li>
                         </ul>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Também comum para conversas informais no início da semana. Um pouco mais sofisticada que "How was...".</p>
                 </div>
             </div>
             <h3 class="text-2xl font-bold text-cyan-300 mb-3 mt-8 text-left">Respostas Comuns</h3>
@@ -514,18 +855,21 @@
                         <strong>Nothing much!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Nothing much!')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Nada demais! / Nada de muito especial!)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Resposta casual e comum para manter a conversa leve. Adequada para o início de reuniões informais.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Nothing much, just the basics.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Nothing much, just the basics.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Nada demais, só o básico.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Similar a "Nothing much!", mantém a informalidade e é bem compreendida.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Pretty good!</strong> <span class="speaker-icon" onclick="playAudio(event, 'Pretty good!')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Muito bom! / Bem legal!)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Ótima resposta para demonstrar um bom humor no início da reunião.</p>
                 </div>
                 <div class="observation-box">
                     <p class="font-bold text-neon-blue mb-1">Observação para Brasileiros:</p>
@@ -536,7 +880,7 @@
         </section>
 
         <section id="atividades-comuns-de-fim-de-semana" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">6. Atividades Comuns de Fim de Semana</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">8. Atividades Comuns de Fim de Semana</h2>
             <p class="text-base text-gray-300 mb-6">
                 Aqui estão algumas atividades comuns de fim de semana que você pode usar em suas conversas:
             </p>
@@ -547,6 +891,7 @@
                         <button class="advanced-button" onclick="alert('Esta é uma forma básica de dizer "relaxar em casa".')">Inglês Básico</button>
                     </p>
                     <p class="text-gray-400">(Relaxar em casa.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre o fim de semana.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -554,12 +899,14 @@
                         <button class="advanced-button" onclick="alert('É uma expressão mais informal para "relaxar em casa", equivalente a "azar em casa".')">Inglês Avançado</button>
                     </p>
                     <p class="text-gray-400">(Azar em casa.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Mais informal, use com colegas próximos em conversas descontraídas.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Visit my parents.</strong> <span class="speaker-icon" onclick="playAudio(event, 'Visit my parents.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Visitar meus pais.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre o fim de semana.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -567,6 +914,7 @@
                         <button class="advanced-button" onclick="alert('Esta é uma forma mais formal e educada de dizer "visitar meus pais".')">Inglês Avançado</button>
                     </p>
                     <p class="text-gray-400">(Fazer uma visita aos meus pais.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Mais formal, pode ser usada em conversas com superiores ou em ambientes mais tradicionais.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -574,6 +922,7 @@
                         <button class="advanced-button" onclick="alert('Esta é uma forma muito básica de dizer "assistir TV/séries".')">Inglês Muito Básico</button>
                     </p>
                     <p class="text-gray-400">(Assistir TV/séries.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre o fim de semana.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -581,6 +930,7 @@
                         <button class="advanced-button" onclick="alert('Significa colocar em dia as séries de TV que você não conseguiu assistir.')">Inglês Avançado</button>
                     </p>
                     <p class="text-gray-400">(Colocar minhas séries de TV em dia.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Para conversas informais com colegas que compartilham interesses em séries.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -588,6 +938,7 @@
                         <button class="advanced-button" onclick="alert('Similar a "catch up on my TV series", mas específico para a plataforma Netflix.')">Inglês Avançado</button>
                     </p>
                     <p class="text-gray-400">(Colocar o Netflix em dia.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Similar ao anterior, para conversas informais sobre lazer.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -595,6 +946,7 @@
                         <button class="advanced-button" onclick="alert('Esta é uma forma intermediária de dizer "sair para jantar".')">Inglês Intermediário</button>
                     </p>
                     <p class="text-gray-400">(Sair para jantar.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre planos ou atividades de lazer.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -606,6 +958,7 @@
                         <p class="font-bold text-neon-blue mb-1">Observação:</p>
                         <p><strong class="text-neon-blue">Dine</strong> é um verbo mais formal que significa "jantar". <strong class="text-neon-blue">Dinner</strong> é o substantivo para "jantar" (a refeição).</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Mais formal, pode ser usada em conversas com clientes ou superiores sobre atividades sociais.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -613,6 +966,7 @@
                         <button class="advanced-button" onclick="alert('Esta é uma forma intermediária de dizer "ir à academia".')">Inglês Intermediário</button>
                     </p>
                     <p class="text-gray-400">(Ir à academia.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre rotina e bem-estar.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
@@ -623,6 +977,7 @@
                         <p class="font-bold text-neon-blue mb-1">Observação para Brasileiros:</p>
                         <p>Em inglês, <strong class="text-neon-blue">"gym"</strong> é a palavra correta para "academia" (local de exercícios). <strong class="text-neon-blue">"Academy"</strong> em inglês se refere a uma instituição de ensino superior ou uma escola especializada (ex: military academy). <strong class="text-neon-blue">"Work out"</strong> significa "malhar" ou "fazer exercícios".</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre rotina de exercícios.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -630,6 +985,7 @@
                         <button class="advanced-button" onclick="alert('Esta é uma forma intermediária de dizer "fazer compras".')">Inglês Intermediário</button>
                     </p>
                     <p class="text-gray-400">(Fazer compras.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre atividades de lazer.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -637,6 +993,7 @@
                         <button class="advanced-button" onclick="alert('Esta é uma forma básica de dizer "ler um livro".')">Inglês Básico</button>
                     </p>
                     <p class="text-gray-400">(Ler um livro.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre hobbies ou fim de semana.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -644,6 +1001,7 @@
                         <button class="advanced-button" onclick="alert('Significa colocar a leitura de um livro em dia, ou seja, ler um livro que você queria ler ou continuar um que parou.')">Inglês Avançado</button>
                     </p>
                     <p class="text-gray-400">(Colocar a leitura de um livro em dia.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Para conversas informais com colegas que leem ou para expressar que você usou o tempo livre para ler.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold flex items-center">
@@ -655,12 +1013,13 @@
                         <p class="font-bold text-neon-blue mb-1">Observação para Brasileiros:</p>
                         <p><strong class="text-neon-blue">"Run errands"</strong> é uma expressão muito comum e útil para descrever a ação de fazer aquelas pequenas tarefas do dia a dia, como ir ao banco, ao supermercado, buscar algo, etc. Em português, seria algo como "resolver uns pepinos", "fazer os corres", "dar uma saidinha para resolver umas coisas" ou "fazer os afazeres de casa/rua".</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Para conversas informais sobre atividades do dia a dia ou fim de semana.</p>
                 </div>
             </div>
         </section>
 
         <section id="pratica-de-dialogo-fim-de-semana" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">7. Prática de Diálogo (Fim de Semana)</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">9. Prática de Diálogo (Fim de Semana)</h2>
             <p class="text-base text-gray-300 mb-6">
                 Crie um pequeno diálogo utilizando as perguntas e respostas sobre o fim de semana que você aprendeu na seção 5, e as atividades da seção 6.
             </p>
@@ -694,7 +1053,7 @@
         </section>
 
         <section id="estrutura-svo" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">8. Estrutura SVO (Subject-Verb-Object)</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">10. Estrutura SVO (Subject-Verb-Object)</h2>
             <p class="text-base text-gray-300 mb-6">
                 Aprender a estrutura básica das frases em inglês é fundamental para se comunicar com clareza. Em inglês, a ordem mais comum das palavras é <strong class="text-neon-blue">SVO: Sujeito (Subject) + Verbo (Verb) + Objeto (Object)</strong>.
             </p>
@@ -708,7 +1067,7 @@
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
-                        <strong>Verb (Verbo):</strong> A ação que está sendo realizada.
+                        <strong>Verb (Verbo):</strong> Ação que está sendo realizada.
                     </p>
                     <p class="text-gray-400">Ex: <strong class="text-yellow-300">work</strong> (trabalhar), <strong class="text-yellow-300">eats</strong> (come), <strong class="text-yellow-300">developed</strong> (desenvolveu).</p>
                 </div>
@@ -900,7 +1259,7 @@
         </section>
 
         <section id="drag-and-drop-pronomes-pessoais" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">9. Drag and Drop: Pronomes Pessoais</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">11. Drag and Drop: Pronomes Pessoais</h2>
             <p class="text-base text-gray-300 mb-6">
                 Arraste o pronome correto da coluna da direita e solte-o ao lado da expressão correspondente na coluna da esquerda.
             </p>
@@ -924,7 +1283,7 @@
 
         <!-- Seção 10: O Uso de "It" como Sujeito Impessoal -->
         <section id="o-uso-de-it-como-sujeito-impessoal" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">10. O Uso de "It" como Sujeito Impessoal</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">12. O Uso de "It" como Sujeito Impessoal</h2>
             <p class="text-base text-gray-300 mb-6 text-left">
                 No português, é comum iniciarmos frases diretamente com um verbo, especialmente ao falar sobre tempo, clima, distância ou situações gerais. Por exemplo: "Está chovendo", "É tarde", "Foi difícil".
             </p>
@@ -1120,7 +1479,7 @@
 
         <!-- Seção 11: Expressando Idade -->
         <section id="expressando-idade" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">11. Expressando Idade: "I am... years old"</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">13. Expressando Idade: "I am... years old"</h2>
             <p class="text-base text-gray-300 mb-6 text-left">
                 Uma das diferenças mais comuns e importantes entre o português e o inglês é como expressamos a idade.
             </p>
@@ -1180,7 +1539,7 @@
 
         <!-- Nova Seção 12: Onde Você Mora -->
         <section id="onde-voce-mora" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">12. Onde Você Mora: "I live in..."</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">14. Onde Você Mora: "I live in..."</h2>
             <p class="text-base text-gray-300 mb-6 text-left">
                 Para dizer onde você mora em inglês, a estrutura mais comum e correta é usar o verbo "to live" (morar) seguido da preposição <strong class="text-neon-blue">"in"</strong>.
             </p>
@@ -1285,7 +1644,7 @@
 
         <!-- Nova Seção 13: Minha Família e Casa -->
         <section id="minha-familia-e-casa" class="section-card w-full max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold text-neon-blue mb-6">13. Minha Família e Casa: Apresentando Seus Entes Queridos</h2>
+            <h2 class="text-3xl font-bold text-neon-blue mb-6">15. Minha Família e Casa: Apresentando Seus Entes Queridos</h2>
             <p class="text-base text-gray-300 mb-6 text-left">
                 Aprender a falar sobre sua família é essencial para conversas pessoais e para construir relacionamentos.
             </p>
@@ -1297,12 +1656,14 @@
                         <strong>Daughter</strong> <span class="speaker-icon" onclick="playAudio(event, 'Daughter')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">Tradução: Filha</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use ao apresentar sua família em conversas informais com colegas.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Son</strong> <span class="speaker-icon" onclick="playAudio(event, 'Son')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">Tradução: Filho</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use ao apresentar sua família em conversas informais com colegas.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
@@ -1313,18 +1674,21 @@
                         <p class="font-bold text-neon-blue mb-1">Observação Importante:</p>
                         <p><strong class="text-red-400">"Children" é o plural irregular de "child" (criança/filho/filha). Não existe "childs" em inglês.</strong> Use "children" para se referir a dois ou mais filhos, independentemente do sexo.</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Comum em conversas informais sobre a vida pessoal.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Husband</strong> <span class="speaker-icon" onclick="playAudio(event, 'Husband')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">Tradução: Marido</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use ao apresentar seu cônjuge em conversas informais.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Wife</strong> <span class="speaker-icon" onclick="playAudio(event, 'Wife')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">Tradução: Esposa</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use ao apresentar seu cônjuge em conversas informais.</p>
                 </div>
                  <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
@@ -1335,6 +1699,7 @@
                         <p class="font-bold text-neon-blue mb-1">Dica:</p>
                         <p><strong class="text-red-400">"Spouse"</strong> é um termo neutro de gênero para se referir ao seu parceiro(a) casado(a). É útil em contextos formais ou quando você não quer especificar o sexo.</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Ideal para contextos mais formais ou quando a neutralidade de gênero é preferível.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
@@ -1345,6 +1710,7 @@
                         <p class="font-bold text-neon-blue mb-1">Observação Importante:</p>
                         <p><strong class="text-red-400">"Parents" em inglês sempre se refere a "pai e mãe" juntos.</strong> Se você quiser falar apenas sobre o pai, use "father"; apenas sobre a mãe, use "mother".</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Comum em conversas informais sobre a vida pessoal.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
@@ -1355,18 +1721,21 @@
                         <p class="font-bold text-neon-blue mb-1">Observação:</p>
                         <p>Assim como "parents", <strong class="text-red-400">"grandparents"</strong> se refere a ambos os avós. Para especificar, use "grandfather" (avô) ou "grandmother" (avó).</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre a família, se for relevante.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Grandfather</strong> <span class="speaker-icon" onclick="playAudio(event, 'Grandfather')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">Tradução: Avô</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre a família.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Grandmother</strong> <span class="speaker-icon" onclick="playAudio(event, 'Grandmother')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">Tradução: Avó</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre a família.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
@@ -1377,6 +1746,7 @@
                         <p class="font-bold text-neon-blue mb-1">Dica:</p>
                         <p>Embora "housewife" seja o termo mais comum, alguns preferem "homemaker" (pessoa que cuida do lar) por ser neutro de gênero, mas "housewife" é amplamente compreendido.</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre a profissão de um membro da família.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
@@ -1387,6 +1757,7 @@
                         <p class="font-bold text-neon-blue mb-1">Dica:</p>
                         <p>Use "siblings" quando quiser se referir a irmãos e irmãs sem especificar o sexo, como em "Do you have any siblings?" (Você tem irmãos/irmãs?).</p>
                     </div>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Para conversas informais sobre a família, quando não se quer especificar o sexo dos irmãos.</p>
                 </div>
             </div>
 
@@ -1397,18 +1768,21 @@
                         <strong>Pet(s)</strong> <span class="speaker-icon" onclick="playAudio(event, 'Pet')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">Tradução: Animal(is) de estimação</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Comum em conversas informais sobre a vida pessoal.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Dog</strong> <span class="speaker-icon" onclick="playAudio(event, 'Dog')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">Tradução: Cachorro</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre animais de estimação.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         <strong>Cat</strong> <span class="speaker-icon" onclick="playAudio(event, 'Cat')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">Tradução: Gato</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Use em conversas informais sobre animais de estimação.</p>
                 </div>
             </div>
 
@@ -1419,42 +1793,49 @@
                         I have a <strong class="text-yellow-300">daughter</strong>. <span class="speaker-icon" onclick="playAudio(event, 'I have a daughter.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Eu tenho uma filha.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Em conversas informais, para compartilhar sobre sua família.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         I have a <strong class="text-yellow-300">son</strong>. <span class="speaker-icon" onclick="playAudio(event, 'I have a son.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Eu tenho um filho.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Em conversas informais, para compartilhar sobre sua família.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         I have two <strong class="text-yellow-300">children</strong>. <span class="speaker-icon" onclick="playAudio(event, 'I have two children.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Eu tenho dois filhos/duas crianças.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Em conversas informais, para compartilhar sobre sua família.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         This is my <strong class="text-yellow-300">husband</strong>. <span class="speaker-icon" onclick="playAudio(event, 'This is my husband.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Este é meu marido.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Ao apresentar seu cônjuge em um evento de trabalho ou em uma conversa informal.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         This is my <strong class="text-yellow-300">wife</strong>. <span class="speaker-icon" onclick="playAudio(event, 'This is my wife.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Esta é minha esposa.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Ao apresentar seu cônjuge em um evento de trabalho ou em uma conversa informal.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         These are my <strong class="text-yellow-300">parents</strong>. <span class="speaker-icon" onclick="playAudio(event, 'These are my parents.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Estes são meus pais.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Ao apresentar seus pais em um evento de trabalho ou em uma conversa informal.</p>
                 </div>
                 <div class="bg-gray-700 bg-opacity-70 rounded-lg p-4">
                     <p class="text-lg text-green-300 font-semibold">
                         I have a <strong class="text-yellow-300">dog</strong> and a <strong class="text-yellow-300">cat</strong>. <span class="speaker-icon" onclick="playAudio(event, 'I have a dog and a cat.')">&#128266;</span>
                     </p>
                     <p class="text-gray-400">(Eu tenho um cachorro e um gato.)</p>
+                    <p class="text-gray-400 mt-2 text-left text-sm"><strong>Uso em Reuniões:</strong> Em conversas informais sobre animais de estimação.</p>
                 </div>
             </div>
 
@@ -1625,7 +2006,8 @@
                     translationTemplate: "Eu trabalho na [nome da sua empresa].",
                     hint: "sua empresa",
                     rewriteTranslation: "Eu trabalho na [nome da sua empresa]." // Adicionada tradução para o rewrite
-                }
+                },
+                meetingUsage: "Use para descrever sua ocupação ou a empresa onde trabalha em contextos de networking ou introduções em reuniões."
             },
             {
                 id: "vocab-meeting",
@@ -1641,7 +2023,8 @@
                     translationTemplate: "A reunião é às [hora] PM.",
                     hint: "hora (ex: 3, 4, 5)",
                     rewriteTranslation: "Tenho uma reunião às [hora] da tarde." // Tradução exata para o rewrite
-                }
+                },
+                meetingUsage: "Essencial para se referir a reuniões, agendar ou discutir o andamento de uma."
             },
             {
                 id: "vocab-walk-pets",
@@ -1657,7 +2040,8 @@
                     translationTemplate: "Eu [verbo] meu cachorro toda [período].",
                     hint: "verbo (ex: walk), período (ex: morning)",
                     rewriteTranslation: "Eu passeio com meu cachorro toda manhã."
-                }
+                },
+                meetingUsage: "Para conversas informais sobre atividades pessoais, especialmente no início ou fim de reuniões descontraídas."
             },
             {
                 id: "vocab-exercise",
@@ -1673,7 +2057,8 @@
                     translationTemplate: "Eu [verbo] na [lugar].",
                     hint: "verbo (ex: exercise), lugar (ex: gym)",
                     rewriteTranslation: "Eu faço exercício na academia."
-                }
+                },
+                meetingUsage: "Para conversas informais sobre rotina e bem-estar com colegas."
             },
             {
                 id: "vocab-work-in",
@@ -1696,9 +2081,10 @@
                     text: `
                         <p><strong class="text-neon-blue">Department:</strong> Refere-se a uma divisão formal e estruturada dentro de uma empresa, como "Human Resources Department" (Departamento de Recursos Humanos) ou "Finance Department" (Departamento Financeiro). É uma unidade organizacional bem definida.</p>
                         <p class="mt-2"><strong class="text-neon-blue">Area:</strong> É um termo mais amplo e flexível. Pode se referir a uma "área de atuação" ou "campo de especialização" dentro ou fora de uma estrutura formal. Por exemplo, "I work in the IT area" (Eu trabalho na área de TI) pode significar que você trabalha com TI, mas não necessariamente em um "IT Department" específico. Também pode ser usado para "área de vendas" (sales area), "área de pesquisa" (research area), etc.</p>
-                        <p class="mt-2">Para "setor" ou "indústria", use <strong class="text-neon-blue">"sector"</strong> ou <strong class="text-neon-blue">"industry"</strong>, respectivamente. Ex: "I work in the financial sector." (Trabalho no setor financeiro.) "She works in the healthcare industry." (Ela trabalha na indústria da saúde.)</p>
+                        <p class="mt-2">Para "setor" ou "indústria", use <strong class="text-neon-blue">"sector"</strong> ou <strong class="text-neon-blue">""industry"</strong>, respectivamente. Ex: "I work in the financial sector." (Trabalho no setor financeiro.) "She works in the healthcare industry." (Ela trabalha na indústria da saúde.)</p>
                     `
-                }
+                },
+                meetingUsage: "Use para descrever sua área de atuação ou setor da empresa em apresentações ou discussões de equipe."
             }
         ];
 
@@ -1806,6 +2192,15 @@
                     `;
                     contentDiv.appendChild(observationBox);
                 }
+
+                // Adiciona a nota de uso em reuniões
+                if (item.meetingUsage) {
+                    const meetingUsageP = document.createElement('p');
+                    meetingUsageP.classList.add('text-gray-400', 'mt-2', 'text-left', 'text-sm');
+                    meetingUsageP.innerHTML = `<strong>Uso em Reuniões:</strong> ${item.meetingUsage}`;
+                    contentDiv.appendChild(meetingUsageP);
+                }
+
 
                 cardDiv.appendChild(button);
                 cardDiv.appendChild(learnedButton);
@@ -2273,7 +2668,7 @@
                 feedbackDiv.innerHTML = `<p class="text-green-400">✅ Tradução correta! Muito bem!</p>`;
             } else if (userAnswer.length > 0) {
                 feedbackDiv.innerHTML = `
-                    <p class="text-red-400">❌ Tradução incorreta. A tradução esperada era: "${expectedAnswer}"</p>
+                    <p class="text-red-400">❌ Tradução incorreta. A tradução esperada era: "${expectedAnswer}".</p>
                     <p class="text-yellow-400 mt-2">Sua tradução: "${userTranslation}"</p>
                 `;
             } else {
@@ -2294,7 +2689,7 @@
                 if (heading) {
                     const sectionTitle = heading.textContent;
                     // Create a slug from the title for the ID
-                    const sectionId = sectionTitle.toLowerCase()
+                    const sectionId = section.id || sectionTitle.toLowerCase()
                                                 .replace(/[^a-z0-9\s-]/g, '') // Remove non-alphanumeric chars except space and hyphen
                                                 .replace(/\s+/g, '-') // Replace spaces with hyphens
                                                 .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
